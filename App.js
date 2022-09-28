@@ -1,20 +1,40 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, SafeAreaView} from 'react-native';
+import Index from './Index.js';
+import Main from './Main.js';
 
-export default function App() {
+
+const App = () => {
+
+  const [showIndex, setShowIndex] = useState(true);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+
+    <SafeAreaView style={styles.container}>
+        
+    {showIndex && (
+      <Index setShowIndex={setShowIndex}></Index>
+    )}
+
+    {!showIndex && (
+      <Main setShowIndex={setShowIndex}></Main>
+    )}
+
+
+    </SafeAreaView>
+  )
+};
+
+export default App;
 
 const styles = StyleSheet.create({
+
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#444444',
+    color: 'whtie',
   },
-});
+
+})
