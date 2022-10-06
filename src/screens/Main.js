@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {FlatList, View, Text, Image, Modal, TouchableOpacity, SafeAreaView, TextInput} from 'react-native';
-import AccordionItem from './AccordionItem.js';
+import AccordionItem from '../components/AccordionItem.js';
 import styles from './MainStyles.js';
 
 const Main = () => {

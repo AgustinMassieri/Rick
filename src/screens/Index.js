@@ -7,7 +7,7 @@ const Index = ({setShowIndex}) => {
   return (
     <SafeAreaView style={styles.container}>
       <TouchableOpacity onPress={()=>{ Vibration.vibrate(10*100000000); }}>
-        <Image style={{resizeMode: "cover", height:100, width: 250}} source={require('./logo3.png')} />
+        <Image style={{resizeMode: "cover", height:100, width: 250}} source={require('../../logo3.png')} />
       </TouchableOpacity>
       <Text style={styles.subtitle}>By Joaquin Velazquez & Agustin Massieri</Text>
       <TouchableOpacity onPress={() => setShowIndex(false)}>

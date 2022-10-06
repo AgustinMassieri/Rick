@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {View, StyleSheet, Text, TouchableOpacity, Image, TouchableHighlight, Vibration} from 'react-native';
-import status from './filterValues/statusValues.js'
-import gender from './filterValues/genderValues.js'
-import species from './filterValues/speciesValues.js'
-import types from './filterValues/typesValues.js'
+import status from '../../filterValues/statusValues.js'
+import gender from '../../filterValues/genderValues.js'
+import species from '../../filterValues/speciesValues.js'
+import types from '../../filterValues/typesValues.js'
 
 const AccordionItem = ({setPageCurrent, setStatusFilter, setGenderFilter, setTypeFilter, setSpeciesFilter, setCharacters, setNameFilter, deleteEnable, setDeleteEnable}) => {
   const [showContent, setShowContent] = useState(false);
@@ -46,7 +46,7 @@ const AccordionItem = ({setPageCurrent, setStatusFilter, setGenderFilter, setTyp
             setDeleteEnable(false);
           }
         }}>
-        <Image style={styles.papelera} source={require('./papelera.png')}/>     
+        <Image style={styles.papelera} source={require('../../papelera.png')}/>     
       </TouchableOpacity> 
       
       {showContent && (

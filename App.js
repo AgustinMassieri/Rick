@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {StyleSheet, SafeAreaView} from 'react-native';
-import Index from './Index.js';
-import Main from './Main.js';
+import Index from './src/screens/Index.js';
+import Main from './src/screens/Main.js';
 
 
 const App = () => {
