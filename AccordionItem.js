@@ -5,7 +5,7 @@ import gender from './filterValues/genderValues.js'
 import species from './filterValues/speciesValues.js'
 import types from './filterValues/typesValues.js'
 
-const AccordionItem = ({setPageCurrent, setStatusFilter, setGenderFilter, setTypeFilter, setSpeciesFilter, setCharacters, setNameFilter}) => {
+const AccordionItem = ({setPageCurrent, setStatusFilter, setGenderFilter, setTypeFilter, setSpeciesFilter, setCharacters, setNameFilter, deleteEnable, setDeleteEnable}) => {
   const [showContent, setShowContent] = useState(false);
   const [showStatus, setShowStatus] = useState(false);
   const [showType, setShowType] = useState(false);
@@ -17,7 +17,7 @@ const AccordionItem = ({setPageCurrent, setStatusFilter, setGenderFilter, setTyp
     return data.map( (element) => { 
       return (
         <View key={element.key}>
-          <TouchableOpacity onPress={() => {setCharacters([]); setFilter(element.value); setPageCurrent(1)}}>
+          <TouchableOpacity onPress={() => {setCharacters([]); setFilter(element.value); setPageCurrent(1); setDeleteEnable(true);}}>
             <Text style={styles.text}>{element.value}</Text>
           </TouchableOpacity>
         </View>
@@ -34,14 +34,17 @@ const AccordionItem = ({setPageCurrent, setStatusFilter, setGenderFilter, setTyp
         </View>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => {
-          setStatusFilter("");
-          setGenderFilter("");
-          setTypeFilter("");
-          setSpeciesFilter("");
-          setNameFilter("");
-          setPageCurrent(1);
-          setCharacters([]);
-          Vibration.vibrate(10*100000000);
+          if(deleteEnable){
+            setStatusFilter("");
+            setGenderFilter("");
+            setTypeFilter("");
+            setSpeciesFilter("");
+            setNameFilter("");
+            setPageCurrent(1);
+            setCharacters([]);
+            Vibration.vibrate(10*100000000);
+            setDeleteEnable(false);
+          }
         }}>
         <Image style={styles.papelera} source={require('./papelera.png')}/>     
       </TouchableOpacity> 

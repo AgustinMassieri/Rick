@@ -1,28 +1,25 @@
 import React, {useEffect, useState} from 'react';
-import {FlatList, View, Text, StyleSheet, Image, Modal, TouchableOpacity, SafeAreaView, TextInput} from 'react-native';
+import {FlatList, View, Text, Image, Modal, TouchableOpacity, SafeAreaView, TextInput} from 'react-native';
 import AccordionItem from './AccordionItem.js';
+import styles from './MainStyles.js';
 
 const Main = () => {
 
   const [characters, setCharacters] = useState([]);
   const [pageCurrent, setPageCurrent] = useState(1);
-
   const [statusFilter, setStatusFilter] = useState("");
   const [genderFilter, setGenderFilter] = useState("");
   const [typeFilter, setTypeFilter] = useState("");
   const [speciesFilter, setSpeciesFilter] = useState("");
-
   const [showModal, setShowModal] = useState(false);
-
   const [characterCurrent, setCharacterCurrent] = useState("");
-
   const [nameFilter, setNameFilter] = useState("");
+  const [deleteEnable, setDeleteEnable] = useState(false);
 
   const apiURL = 'https://rickandmortyapi.com/api/character/?page=' + pageCurrent + '&name=' + nameFilter + '&status=' + statusFilter + '&gender=' + genderFilter + '&type=' + typeFilter + '&species=' + speciesFilter;
 
   useEffect(() => {
     getData();
-    console.log();
   }, [apiURL]);
 
   getData = async() => {
@@ -49,6 +46,7 @@ const Main = () => {
 
   handlerLoadMore = () =>{
     setPageCurrent(pageCurrent+1);
+    setDeleteEnable(true);
   }
 
   return (
@@ -61,8 +59,10 @@ const Main = () => {
                      setSpeciesFilter={setSpeciesFilter}
                      setCharacters={setCharacters}
                      setNameFilter={setNameFilter}
+                     deleteEnable={deleteEnable}
+                     setDeleteEnable={setDeleteEnable}
                      />
-      <TextInput style={styles.searchBar} value={nameFilter} onChangeText={ (value) => {setNameFilter(value); setPageCurrent(1);} } placeholder='Search for characters by name ...'></TextInput>            
+      <TextInput style={styles.searchBar} value={nameFilter} onChangeText={ (value) => {setNameFilter(value); setPageCurrent(1); setCharacters([]); if(value.length == 0){setDeleteEnable(false)}else{setDeleteEnable(true)}} } placeholder='Search for characters by name ...'></TextInput>            
       <FlatList
         style={{marginTop: 10, marginBottom:60}}
         keyExtractor={(item, index) => item.id }
@@ -108,104 +108,6 @@ const Main = () => {
     </SafeAreaView>
   )
 
-}
+} 
 
 export default Main;
-
-const styles = StyleSheet.create({
-  modalContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  subtitle:{
-    fontStyle: 'italic',
-    color: 'white',
-    marginBottom: 20
-  },
-  modalCard: {
-    width: '70%',
-    height: '43%',
-    borderRadius: 30,
-    borderStyle: 'solid',
-    borderWidth: 2,
-    borderColor: 'black',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#585858',
-  },
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#444444',
-    color: 'whtie',
-  },
-  texto: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    margin: 10,
-    color: 'white',
-    width: 160,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  image: {
-    width: 100,
-    height: 100,
-    borderRadius: 40,
-    marginBottom: 20,
-    marginLeft:25,
-    borderColor: 'white',
-    borderStyle: 'solid',
-    borderWidth: 1,
-  },
-  image2: {
-    width: '80%',
-    height: '60%', 
-    borderRadius: 10,
-    marginBottom: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderColor: 'white',
-    borderStyle: 'solid',
-    borderWidth: 1,
-  },
-  row: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  button: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#efefef',
-    paddingHorizontal: 10,
-    marginBottom: 5,
-    fontWeight: 'bold',
-    fontSize: 18,
-    position: 'absolute',
-    borderColor: 'black',
-    borderStyle: 'solid',
-    borderWidth: 1,
-    right: 35,
-    bottom:65
-  },
-  filteredBy: {
-    marginRight:10, 
-    color: 'white', 
-    fontWeight: 'bold',
-    fontSize: 18
-  },
-  searchBar: {
-    borderRadius:10,
-    borderColor: 'black', 
-    borderStyle:'solid',
-    borderWidth: 2, 
-    backgroundColor:'white', 
-    width: 250, 
-    height: 30, 
-    paddingLeft: 10,
-    marginTop: 10
-  }
-});
