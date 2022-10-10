@@ -4,20 +4,43 @@ import status from '../../filterValues/statusValues.js'
 import gender from '../../filterValues/genderValues.js'
 import species from '../../filterValues/speciesValues.js'
 import types from '../../filterValues/typesValues.js'
+import { black } from 'react-native-paper/lib/typescript/styles/colors.js';
 
-const AccordionItem = ({setPageCurrent, setStatusFilter, setGenderFilter, setTypeFilter, setSpeciesFilter, setCharacters, setNameFilter, deleteEnable, setDeleteEnable}) => {
+const AccordionItem = ({setPageCurrent, setStatusFilter, 
+  setGenderFilter, setTypeFilter, setSpeciesFilter, setCharacters,
+  setNameFilter, deleteEnable, setDeleteEnable,
+  statusFilter, genderFilter, typeFilter, speciesFilter}) => {
+
   const [showContent, setShowContent] = useState(false);
   const [showStatus, setShowStatus] = useState(false);
   const [showType, setShowType] = useState(false);
   const [showGender, setShowGender] = useState(false);
   const [showSpecies, setShowSpecies] = useState(false); 
 
-  const optionsList = (data, setFilter) => {
+  const updateDeleteButton = (filterValue, otherFilterValue1, otherFilterValue2, otherFilterValue3) =>{
+
+    if(filterValue=='' && otherFilterValue1=='' && otherFilterValue2=='' && otherFilterValue3==''){
+      setDeleteEnable(false);
+    }else{
+      setDeleteEnable(true);
+    }
+
+  }
+
+  const optionsList = (data, setFilter, filterValue, otherFilterValue1, otherFilterValue2, otherFilterValue3) => {
     
     return data.map( (element) => { 
       return (
         <View key={element.key}>
-          <TouchableOpacity onPress={() => {setCharacters([]); setFilter(element.value); setPageCurrent(1); setDeleteEnable(true);}}>
+          <TouchableOpacity onPress={() => {setCharacters([]);setPageCurrent(1); 
+            if( filterValue == '') {
+              setFilter(element.value); 
+              updateDeleteButton(element.value, otherFilterValue1, otherFilterValue2, otherFilterValue3, setDeleteEnable);
+            }else{
+              setFilter('');
+              updateDeleteButton('', otherFilterValue1, otherFilterValue2, otherFilterValue3, setDeleteEnable);
+              
+            }}}>
             <Text style={styles.text}>{element.value}</Text>
           </TouchableOpacity>
         </View>
@@ -58,9 +81,9 @@ const AccordionItem = ({setPageCurrent, setStatusFilter, setGenderFilter, setTyp
           </TouchableOpacity>
           {showStatus && (
             
-            <TouchableHighlight activeOpacity={0.9} backgroundColor='white'>
-              <View style={styles.options}>{optionsList(status, setStatusFilter)}</View>
-            </TouchableHighlight>
+            <TouchableOpacity activeOpacity={0.9} backgroundColor='white'>
+             <View style={styles.options}>{optionsList(status, setStatusFilter,statusFilter,genderFilter, typeFilter, speciesFilter )}</View>
+            </TouchableOpacity>
           )}
 
           <TouchableOpacity style={styles.button} onPress={() => setShowGender(!showGender)}>
@@ -69,7 +92,7 @@ const AccordionItem = ({setPageCurrent, setStatusFilter, setGenderFilter, setTyp
             </View>
           </TouchableOpacity>
           {showGender && (
-            <View style={styles.options}>{optionsList(gender, setGenderFilter)}</View>
+            <View style={styles.options}>{optionsList(gender, setGenderFilter, genderFilter, statusFilter, typeFilter, speciesFilter)}</View>
           )}
 
           <TouchableOpacity style={styles.button} onPress={() => setShowType(!showType)}>
@@ -78,7 +101,7 @@ const AccordionItem = ({setPageCurrent, setStatusFilter, setGenderFilter, setTyp
             </View>
           </TouchableOpacity>
           {showType&& (
-            <View style={styles.options} >{optionsList(types, setTypeFilter)}</View>
+            <View style={styles.options} >{optionsList(types, setTypeFilter, typeFilter,statusFilter,genderFilter,speciesFilter)}</View>
           )}
 
           <TouchableOpacity style={styles.button} onPress={() => setShowSpecies(!showSpecies)}>
@@ -87,7 +110,7 @@ const AccordionItem = ({setPageCurrent, setStatusFilter, setGenderFilter, setTyp
             </View>
           </TouchableOpacity>
           {showSpecies&& (
-              <View style={styles.options}>{optionsList(species, setSpeciesFilter)}</View>
+              <View style={styles.options}>{optionsList(species, setSpeciesFilter, speciesFilter, statusFilter, genderFilter,typeFilter)}</View>
           )}
 
         </View>
@@ -129,6 +152,9 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     alignItems: 'center',
     justifyContent:'center',
+  },
+  overlay: {
+    backgroundColor: 'green'
   },
   papelera: {
     resizeMode: 'contain', 
