@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {FlatList, View, Text, Image, Modal, TouchableOpacity, SafeAreaView, TextInput} from 'react-native';
+import gender from '../../filterValues/genderValues.js';
 import AccordionItem from '../components/AccordionItem.js';
 import styles from './MainStyles.js';
 
@@ -61,6 +62,10 @@ const Main = () => {
                      setNameFilter={setNameFilter}
                      deleteEnable={deleteEnable}
                      setDeleteEnable={setDeleteEnable}
+                     statusFilter={statusFilter}
+                     genderFilter={genderFilter}
+                     typeFilter={typeFilter}
+                     speciesFilter={speciesFilter}
                      />
       <TextInput style={styles.searchBar} value={nameFilter} onChangeText={ (value) => {setNameFilter(value); setPageCurrent(1); setCharacters([]); if(value.length == 0){setDeleteEnable(false)}else{setDeleteEnable(true)}} } placeholder='Search for characters by name ...'></TextInput>            
       <FlatList
