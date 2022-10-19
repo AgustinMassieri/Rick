@@ -4,7 +4,6 @@ import status from '../../filterValues/statusValues.js'
 import gender from '../../filterValues/genderValues.js'
 import species from '../../filterValues/speciesValues.js'
 import types from '../../filterValues/typesValues.js'
-import { black } from 'react-native-paper/lib/typescript/styles/colors.js';
 
 const AccordionItem = ({setPageCurrent, setStatusFilter, 
   setGenderFilter, setTypeFilter, setSpeciesFilter, setCharacters,

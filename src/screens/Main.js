@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {FlatList, View, Text, Image, Modal, TouchableOpacity, SafeAreaView, TextInput} from 'react-native';
 import gender from '../../filterValues/genderValues.js';
 import AccordionItem from '../components/AccordionItem.js';
+import FlatListItem from '../components/FlatListItem.js';
 import styles from './MainStyles.js';
 
 const Main = () => {
@@ -33,15 +34,9 @@ const Main = () => {
 
   renderItem = ({item}) => {
     return(
-      <>
-        <TouchableOpacity onPress={() => {
-          setCharacterCurrent(item);
-          setShowModal(true);
-        }}>
-          <Text style={styles.texto}>{item.name}</Text>
-          <Image style={styles.image} source={{uri: item.image}} />
-        </TouchableOpacity>
-      </>
+      <FlatListItem item={item} 
+                    setCharacterCurrent={setCharacterCurrent} 
+                    setShowModal={setShowModal}/>
     )
   }
 
