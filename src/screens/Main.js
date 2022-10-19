@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {FlatList, View, Text, Image, Modal, TouchableOpacity, SafeAreaView, TextInput} from 'react-native';
 import gender from '../../filterValues/genderValues.js';
 import AccordionItem from '../components/AccordionItem.js';
+import FiltersList from '../components/FilterList.js';
 import FlatListItem from '../components/FlatListItem.js';
 import styles from './MainStyles.js';
 
@@ -73,22 +74,10 @@ const Main = () => {
         onEndReached={handlerLoadMore}
       />
 
-      <View style={{left:-50,flexDirection:'row',maxWidth:250}}>
-        
-        <Text style={styles.filteredBy}>Filtered by:</Text>
-        {statusFilter && (
-          <Text style={styles.filteredBy}>{statusFilter}</Text>
-        )}
-        {genderFilter && (
-          <Text style={styles.filteredBy}>{genderFilter}</Text>
-        )}
-        {typeFilter && (
-          <Text style={styles.filteredBy}>{typeFilter}</Text>
-        )}
-        {speciesFilter && (
-          <Text style={styles.filteredBy}>{speciesFilter}</Text>
-        )}
-      </View>        
+      <FiltersList statusFilter={statusFilter} 
+                   genderFilter={genderFilter} 
+                   typeFilter={typeFilter}
+                   speciesFilter={speciesFilter}/>       
 
       <Modal transparent={true} visible={showModal} animationType="slide">
         <View style={styles.modalContainer}>
