@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
+import {Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
 
 const FlatListItem = ({item, setCharacterCurrent, setShowModal}) => {
 
@@ -38,4 +38,3 @@ const styles = StyleSheet.create({
         borderWidth: 1,
       }
 });
-  

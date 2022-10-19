@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
 const FiltersList = ({statusFilter, genderFilter, typeFilter, speciesFilter}) => {
