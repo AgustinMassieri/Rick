@@ -82,21 +82,21 @@ const Main = () => {
       <Modal transparent={true} visible={showModal} animationType="slide">
         <View style={styles.modalContainer}>
           <View style={styles.modalCard}>
-          <Text style={{top: 5, marginLeft:210, fontSize: 30, color: 'white'}} onPress={() => setShowModal(false)}>X</Text>
-          <Text style={{marginBottom:10, fontSize: 25, color: 'white', fontWeight: 'bold', textShadowColor: 'black', textShadowRadius: 5,}}>{characterCurrent.name}</Text>
+          <Text style={styles.modalExit} onPress={() => setShowModal(false)}>X</Text>
+          <Text style={styles.modalCharacterName}>{characterCurrent.name}</Text>
           <Image style={styles.image2} source={{uri: characterCurrent.image}}></Image>
           <Text style={styles.button}>{characterCurrent.status}</Text>
-          <Text style={{fontSize: 18, color: 'white'}}>Species: <Text style={{fontWeight: 'bold'}}>{characterCurrent.species}</Text></Text>          
+          <Text style={styles.modalCharacterDescription}>Species: <Text style={{fontWeight: 'bold'}}>{characterCurrent.species}</Text></Text>          
           {characterCurrent.type && (
-            <Text style={{fontSize: 18, color: 'white'}}>Type: <Text style={{fontWeight: 'bold'}}>{characterCurrent.type}</Text></Text>
+            <Text style={styles.modalCharacterDescription}>Type: <Text style={{fontWeight: 'bold'}}>{characterCurrent.type}</Text></Text>
           )}
-          <Text style={{fontSize: 18, color: 'white'}}>Gender: <Text style={{fontWeight: 'bold'}}>{characterCurrent.gender}</Text></Text>
+          <Text style={styles.modalCharacterDescription}>Gender: <Text style={{fontWeight: 'bold'}}>{characterCurrent.gender}</Text></Text>
           </View>
         </View>
       </Modal>   
     </SafeAreaView>
   )
 
-} 
+}
 
 export default Main;

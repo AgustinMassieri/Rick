@@ -22,6 +22,24 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       backgroundColor: '#585858',
     },
+    modalExit:{
+      top:'3%',
+      marginLeft:210,
+      fontSize: 30,
+      color: 'white',
+    },
+    modalCharacterName:{
+      marginBottom:10,
+      fontSize: 25,
+      color: 'white',
+      fontWeight: 'bold',
+      textShadowColor: 'black',
+      textShadowRadius: 5,
+    },
+    modalCharacterDescription: {
+      fontSize: 18, 
+      color: 'white',
+    },
     container: {
       flex: 1,
       justifyContent: 'center',
