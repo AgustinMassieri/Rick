@@ -4,6 +4,7 @@ import gender from '../../filterValues/genderValues.js';
 import AccordionItem from '../components/AccordionItem.js';
 import FiltersList from '../components/FilterList.js';
 import FlatListItem from '../components/FlatListItem.js';
+import ModalItem from '../components/ModalItem.js';
 import styles from './MainStyles.js';
 
 const Main = () => {
@@ -80,19 +81,7 @@ const Main = () => {
                    speciesFilter={speciesFilter}/>       
 
       <Modal transparent={true} visible={showModal} animationType="slide">
-        <View style={styles.modalContainer}>
-          <View style={styles.modalCard}>
-          <Text style={styles.modalExit} onPress={() => setShowModal(false)}>X</Text>
-          <Text style={styles.modalCharacterName}>{characterCurrent.name}</Text>
-          <Image style={styles.image2} source={{uri: characterCurrent.image}}></Image>
-          <Text style={styles.button}>{characterCurrent.status}</Text>
-          <Text style={styles.modalCharacterDescription}>Species: <Text style={{fontWeight: 'bold'}}>{characterCurrent.species}</Text></Text>          
-          {characterCurrent.type && (
-            <Text style={styles.modalCharacterDescription}>Type: <Text style={{fontWeight: 'bold'}}>{characterCurrent.type}</Text></Text>
-          )}
-          <Text style={styles.modalCharacterDescription}>Gender: <Text style={{fontWeight: 'bold'}}>{characterCurrent.gender}</Text></Text>
-          </View>
-        </View>
+        <ModalItem setShowModal={setShowModal} characterCurrent={characterCurrent}/>
       </Modal>   
     </SafeAreaView>
   )

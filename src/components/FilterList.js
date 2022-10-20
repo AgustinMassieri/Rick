@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
+import styles from '../screens/MainStyles.js';
 
 const FiltersList = ({statusFilter, genderFilter, typeFilter, speciesFilter}) => {
     return(
@@ -22,12 +23,3 @@ const FiltersList = ({statusFilter, genderFilter, typeFilter, speciesFilter}) =>
 }
 
 export default FiltersList;
-
-const styles = StyleSheet.create({
-    filteredBy: {
-        marginRight:10, 
-        color: 'white', 
-        fontWeight: 'bold',
-        fontSize: 18
-    }
-})
