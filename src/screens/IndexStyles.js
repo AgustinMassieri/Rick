@@ -13,7 +13,16 @@ const styles = StyleSheet.create({
       backgroundColor: '#444444',
       color: 'whtie',
     },
-  
+    buttonEnter: {
+      fontWeight: 'bold', 
+      color: 'white', 
+      borderColor: 'white', 
+      borderStyle: 'solid',
+      borderWidth: 2,
+      padding: 10,
+      borderRadius: 4,
+      fontSize: 20
+    }
 });
 
 export default styles;

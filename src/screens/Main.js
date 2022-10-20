@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {FlatList, View, Text, Image, Modal, TouchableOpacity, SafeAreaView, TextInput} from 'react-native';
-import gender from '../../filterValues/genderValues.js';
+import {FlatList, Modal, SafeAreaView, TextInput} from 'react-native';
 import AccordionItem from '../components/AccordionItem.js';
 import FiltersList from '../components/FilterList.js';
 import FlatListItem from '../components/FlatListItem.js';

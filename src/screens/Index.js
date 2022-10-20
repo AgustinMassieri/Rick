@@ -11,18 +11,10 @@ const Index = ({setShowIndex}) => {
       </TouchableOpacity>
       <Text style={styles.subtitle}>By Joaquin Velazquez & Agustin Massieri</Text>
       <TouchableOpacity onPress={() => setShowIndex(false)}>
-        <Text style={{fontWeight: 'bold', 
-                      color: 'white', 
-                      borderColor: 'white', 
-                      borderStyle: 'solid',
-                      borderWidth: 2,
-                      padding: 10,
-                      borderRadius: 4,
-                      fontSize: 20}}>Enter!</Text>
+        <Text style={styles.buttonEnter}>Enter!</Text>
       </TouchableOpacity>
     </SafeAreaView>
     )
-
 }
 
 export default Index;

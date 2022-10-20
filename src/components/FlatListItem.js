@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
+import {Text, Image, TouchableOpacity} from 'react-native';
 import styles from '../screens/MainStyles.js';
 
 const FlatListItem = ({item, setCharacterCurrent, setShowModal}) => {

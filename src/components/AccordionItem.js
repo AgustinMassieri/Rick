@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, Text, TouchableOpacity, Image, TouchableHighlight, Vibration} from 'react-native';
+import {View, StyleSheet, Text, TouchableOpacity, Image, Vibration} from 'react-native';
 import status from '../../filterValues/statusValues.js'
 import gender from '../../filterValues/genderValues.js'
 import species from '../../filterValues/speciesValues.js'
