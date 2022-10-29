@@ -1,27 +1,23 @@
-import React, {useState} from 'react';
-import {StyleSheet, SafeAreaView} from 'react-native';
+import React from 'react';
+import {StyleSheet} from 'react-native';
 import Index from './src/screens/Index.js';
 import Main from './src/screens/Main.js';
-
+import Favorites from './src/screens/Favourites.js';
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { NavigationContainer } from '@react-navigation/native'
 
 const App = () => {
 
-  const [showIndex, setShowIndex] = useState(true);
+  const Stack = createNativeStackNavigator();
 
   return (
-
-    <SafeAreaView style={styles.container}>
-        
-    {showIndex && (
-      <Index setShowIndex={setShowIndex}></Index>
-    )}
-
-    {!showIndex && (
-      <Main setShowIndex={setShowIndex}></Main>
-    )}
-
-
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Screen name="Index" component={Index}/>
+        <Stack.Screen name="Main" component={Main}/>
+        <Stack.Screen name="Favorites" component={Favorites}/>
+      </Stack.Navigator>
+    </NavigationContainer>        
   )
 };
 
