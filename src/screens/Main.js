@@ -6,7 +6,7 @@ import FlatListItem from '../components/FlatListItem.js';
 import ModalItem from '../components/ModalItem.js';
 import styles from './MainStyles.js';
 import { db } from '../../config/firebase';
-import { collection, addDoc } from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
 
 const Main = ({navigation}) => {
 
@@ -37,7 +37,7 @@ const Main = ({navigation}) => {
 
   async function addFavCharacter (item){
     try {
-      const docRef = await addDoc(collection(db, "Characters"), {
+      const docRef = await setDoc(doc(db, "Characters", item.name), {
         id: item.id,
         name: item.name,
         species: item.species,
@@ -46,7 +46,6 @@ const Main = ({navigation}) => {
         gender: item.gender,
         image: item.image,
       });
-      console.log("Document written with ID: ", docRef.id);
      } catch (e) {
       console.error("Error adding document: ", e);
     }
@@ -73,7 +72,6 @@ const Main = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-
       <Text style={{color:'white', fontWeight:'bold'}} onPress={() => navigation.navigate('Favorites')}>Favorites</Text>
 
       <AccordionItem setPageCurrent={setPageCurrent}

@@ -4,7 +4,7 @@ import styles from './MainStyles.js';
 import FlatListItem from '../components/FlatListItem.js';
 import ModalItem from '../components/ModalItem.js';
 import { db } from '../../config/firebase';
-import { collection, onSnapshot, query } from "firebase/firestore";
+import { collection, onSnapshot, query, deleteDoc, doc } from "firebase/firestore";
 
 const Favorites = ({navigation}) => {
 
@@ -17,7 +17,6 @@ const Favorites = ({navigation}) => {
       }, []);
 
     getData = async() => {
-
         setCharacters([]);
     
         const q = query(collection(db, "Characters"));
@@ -32,13 +31,27 @@ const Favorites = ({navigation}) => {
         });        
     };
 
-    renderItem = ({item}) => {
+    async function deleteFavCharacter (item){
+        try {
+          const docRef = await deleteDoc(doc(db, "Characters", item.name));
+          getData();
+         } catch (e) {
+          console.error("Error adding document: ", e);
+        }
+      }
 
+    renderItem = ({item}) => {
         return(
-            <FlatListItem item={item} 
-                        setCharacterCurrent={setCharacterCurrent} 
-                        setShowModal={setShowModal}
-                        />
+            <View>
+                <FlatListItem item={item} 
+                            setCharacterCurrent={setCharacterCurrent} 
+                            setShowModal={setShowModal}
+                            />
+
+                <TouchableOpacity onPress={ () => deleteFavCharacter(item)}>
+                    <Image style={{marginLeft: '40%' ,position: 'fixed', width: 20, height:20}} source={require('../../papelera.png')}/>
+                </TouchableOpacity>
+            </View>           
         )
       }
 
