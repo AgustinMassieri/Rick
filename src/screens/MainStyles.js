@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import Index from "./Index";
 
 const styles = StyleSheet.create({
     modalContainer: {
@@ -113,7 +114,18 @@ const styles = StyleSheet.create({
       height: 30, 
       paddingLeft: 10,
       marginTop: 10
-    }
+    },
+    favorite_img: {
+      marginLeft: '40%',
+      position: 'fixed',
+      width: 20,
+      height:20
+    },
+    star_img: {
+      width: 20,
+      height:20
+    },
+  
   });
 
 export default styles;

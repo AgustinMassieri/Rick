@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {FlatList, Modal, SafeAreaView, TextInput, TouchableOpacity,Text, View, Image} from 'react-native';
+import {FlatList, Modal, SafeAreaView, TextInput,Vibration, TouchableOpacity,Text, View, Image} from 'react-native';
 import AccordionItem from '../components/AccordionItem.js';
 import FiltersList from '../components/FilterList.js';
 import FlatListItem from '../components/FlatListItem.js';
@@ -58,9 +58,11 @@ const Main = ({navigation}) => {
                   setCharacterCurrent={setCharacterCurrent} 
                   setShowModal={setShowModal}
                   />
-      <TouchableOpacity onPress={ () => addFavCharacter(item)}>
-          <Image style={{marginLeft: '40%' ,position: 'fixed', width: 20, height:20}} source={require('../../favorite.png')}/>
-      </TouchableOpacity>
+        <TouchableOpacity onPress={ () =>{Vibration.vibrate();addFavCharacter(item)} }>
+          <Image style={styles.favorite_img} 
+                 source={require('../../fav_unselected.png')}
+                 setFavoriteImage={true}/>   
+        </TouchableOpacity>
       </View>
     )
   }
@@ -72,7 +74,13 @@ const Main = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={{color:'white', fontWeight:'bold'}} onPress={() => navigation.navigate('Favorites')}>Favorites</Text>
+      
+      <Text style={{color:'white', fontWeight:'bold', fontSize: 25}} onPress={() => navigation.navigate('Favorites')}>
+        <Image style={styles.star_img} source={require('../../star.png')}/>
+        Favorites
+      </Text>
+
+      
 
       <AccordionItem setPageCurrent={setPageCurrent}
                      setStatusFilter={setStatusFilter} 
