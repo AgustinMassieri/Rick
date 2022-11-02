@@ -169,6 +169,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     //backgroundColor: 'black',
     color: 'white',
-    marginTop: 30
+    marginTop: '4%'
   }
 });

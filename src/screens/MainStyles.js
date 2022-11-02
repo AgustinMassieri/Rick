@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     },
     star_img: {
       width: 20,
-      height:20
+      height:20,
     },
   
   });
