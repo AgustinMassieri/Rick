@@ -22,6 +22,24 @@ const styles = StyleSheet.create({
       padding: 10,
       borderRadius: 4,
       fontSize: 20
+    },
+    input: {
+      borderBottomColor: 'white',
+      borderBottomWidth: 1,
+      margin: 10,
+      fontSize: 20,
+      width: 250,
+      color: 'white',
+      
+    },
+    button: {
+      borderColor: 'white',
+      borderWidth: 2,
+      padding: 5,
+      margin: 20,
+      fontWeight: 'bold',
+      fontSize: 20,
+      color: 'white'
     }
 });
 
