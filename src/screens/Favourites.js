@@ -3,8 +3,8 @@ import {Text, Modal, SafeAreaView, FlatList, Image, TouchableOpacity, View} from
 import styles from './MainStyles.js';
 import FlatListItem from '../components/FlatListItem.js';
 import ModalItem from '../components/ModalItem.js';
-import { db } from '../../config/firebase';
-import { collection, onSnapshot, query, deleteDoc, doc } from "firebase/firestore";
+import { auth, db } from '../../config/firebase';
+import { collection, onSnapshot, query, deleteDoc, doc, where } from "firebase/firestore";
 
 const Favorites = ({navigation}) => {
 
@@ -14,12 +14,12 @@ const Favorites = ({navigation}) => {
 
     useEffect(() => {
         getData();
-      }, []);
+    }, []);
 
     getData = async() => {
         setCharacters([]);
     
-        const q = query(collection(db, "Characters"));
+        const q = query(collection(db, "Characters"), where("userId", "==", auth.currentUser.uid));
         const aux2 = [];
         
         onSnapshot(q, (querySnapshot) => {
@@ -29,16 +29,16 @@ const Favorites = ({navigation}) => {
             });
             setCharacters(aux2);
         });        
-    };
+    }; 
 
     async function deleteFavCharacter (item){
         try {
-          const docRef = await deleteDoc(doc(db, "Characters", item.name));
+          const docRef = await deleteDoc(doc(db, "Characters", item.name+' - '+auth.currentUser.uid));
           getData();
          } catch (e) {
           console.error("Error adding document: ", e);
         }
-      }
+    }
 
     renderItem = ({item}) => {
         return(

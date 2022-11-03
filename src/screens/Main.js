@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {FlatList, Modal, SafeAreaView, TextInput, Text, Image, Animated} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Modal, SafeAreaView, TextInput, Text, Image, Animated } from 'react-native';
 import AccordionItem from '../components/AccordionItem.js';
 import FiltersList from '../components/FilterList.js';
 import ModalItem from '../components/ModalItem.js';
