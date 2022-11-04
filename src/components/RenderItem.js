@@ -36,16 +36,7 @@ const RenderItem = memo(({item, index, scrollY, setCharacterCurrent, setShowModa
        } catch (e) {
         console.error("Error adding document: ", e);
       }
-    }
-  
-    const q = query(collection(db, "Characters"), where("name", "==", item.name));
-    onSnapshot(q, (querySnapshot) => {
-      querySnapshot.docs.forEach( (doc) => {
-        if ( doc.data().userId == auth.currentUser.uid ){
-          setIsFavourite(true);
-        }        
-      })
-    });        
+    }   
 
     const inputRange = [
       -1,
@@ -62,6 +53,20 @@ const RenderItem = memo(({item, index, scrollY, setCharacterCurrent, setShowModa
       inputRange,
       outputRange: [0, 0, 0, 500],
     });
+
+    const q = query(collection(db, "Characters"), where("name", "==", item.name));
+    onSnapshot(q, (querySnapshot) => {
+      let flag = false;
+      querySnapshot.docs.forEach( (doc) => {
+        if ( doc.data().userId == auth.currentUser.uid ){
+          setIsFavourite(true);
+          flag = true;
+        }    
+      })
+      if(flag == false){
+        setIsFavourite(false);
+      }
+    });    
 
     return(
       <Animated.View style={{
