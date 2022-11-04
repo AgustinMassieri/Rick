@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Modal, SafeAreaView, TextInput, Text, Image, Animated } from 'react-native';
+import { FlatList, Modal, SafeAreaView, TextInput, Text, Image, Animated } from 'react-native';
 import AccordionItem from '../components/AccordionItem.js';
 import FiltersList from '../components/FilterList.js';
 import ModalItem from '../components/ModalItem.js';
 import styles from './MainStyles.js';
 import RenderItem from '../components/RenderItem.js';
+import { useFocusEffect } from '@react-navigation/native';
+
 
 const Main = ({navigation}) => {
 
@@ -20,7 +22,6 @@ const Main = ({navigation}) => {
   const [deleteEnable, setDeleteEnable] = useState(false);
 
   const apiURL = 'https://rickandmortyapi.com/api/character/?page=' + pageCurrent + '&name=' + nameFilter + '&status=' + statusFilter + '&gender=' + genderFilter + '&type=' + typeFilter + '&species=' + speciesFilter;
-
   const scrollY = React.useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -76,7 +77,7 @@ const Main = ({navigation}) => {
           [{ nativeEvent: { contentOffset: { y: scrollY } } }],
           { useNativeDriver: true }
         )}
-        keyExtractor={(item, index) => item.id }
+        keyExtractor={ item => item.id }
         numColumns={2}
         columnWrapperStyle={styles.row}
         data={characters}

@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { TouchableOpacity, Animated, Image, Dimensions } from 'react-native';
 import FlatListItem from './FlatListItem';
 import { db, auth } from '../../config/firebase';
-import { setDoc, doc } from "firebase/firestore";
+import { setDoc, doc, deleteDoc } from "firebase/firestore";
 import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import { useState } from 'react';
 
@@ -23,9 +23,19 @@ const RenderItem = memo(({item, index, scrollY, setCharacterCurrent, setShowModa
             image: item.image,
             userId: auth.currentUser.uid
           });
+          setIsFavourite(true);
          } catch (e) {
           console.error("Error adding document: ", e);
         }
+    }
+
+    async function deleteFavCharacter (item){
+      try {
+        const docRef = await deleteDoc(doc(db, "Characters", item.name+' - '+auth.currentUser.uid));
+        setIsFavourite(false);
+       } catch (e) {
+        console.error("Error adding document: ", e);
+      }
     }
   
     const q = query(collection(db, "Characters"), where("name", "==", item.name));
@@ -33,7 +43,7 @@ const RenderItem = memo(({item, index, scrollY, setCharacterCurrent, setShowModa
       querySnapshot.docs.forEach( (doc) => {
         if ( doc.data().userId == auth.currentUser.uid ){
           setIsFavourite(true);
-        }
+        }        
       })
     });        
 
@@ -68,7 +78,7 @@ const RenderItem = memo(({item, index, scrollY, setCharacterCurrent, setShowModa
           </TouchableOpacity>
         )}
         {(isFavourite == true) && ( 
-          <TouchableOpacity onPress={ () => addFavCharacter(item)}>
+          <TouchableOpacity onPress={ () => deleteFavCharacter(item)}>
             <Image style={{marginLeft: '40%' ,position: 'fixed', width: 20, height:20}} source={require('../../fav_selected.png')}/>
           </TouchableOpacity>
         )}
