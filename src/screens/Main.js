@@ -20,6 +20,7 @@ const Main = ({navigation}) => {
   const [characterCurrent, setCharacterCurrent] = useState("");
   const [nameFilter, setNameFilter] = useState("");
   const [deleteEnable, setDeleteEnable] = useState(false);
+  const [value, setValue] = useState(false);
 
   const apiURL = 'https://rickandmortyapi.com/api/character/?page=' + pageCurrent + '&name=' + nameFilter + '&status=' + statusFilter + '&gender=' + genderFilter + '&type=' + typeFilter + '&species=' + speciesFilter;
   const scrollY = React.useRef(new Animated.Value(0)).current;
@@ -27,6 +28,13 @@ const Main = ({navigation}) => {
   useEffect(() => {
     getData();
   }, [apiURL]);
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      setValue(value=>!value);
+    });
+    return unsubscribe;
+  }, [navigation]);
 
   getData = async() => {
     fetch(apiURL) 
@@ -81,6 +89,7 @@ const Main = ({navigation}) => {
         numColumns={2}
         columnWrapperStyle={styles.row}
         data={characters}
+        extraData={value}
         renderItem={renderItem}
         onEndReached={handlerLoadMore}
       />
