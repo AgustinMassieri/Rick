@@ -73,7 +73,8 @@ const RenderItem = memo(({item, index, scrollY, setCharacterCurrent, setShowModa
         transform: [{ scale: scale }, { translateX: Offset }],
         opacity: opacity,
       }}>
-        <FlatListItem item={item} 
+        <FlatListItem 
+                    item={item} 
                     setCharacterCurrent={setCharacterCurrent} 
                     setShowModal={setShowModal}
                     />

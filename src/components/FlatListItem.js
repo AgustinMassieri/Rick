@@ -6,7 +6,7 @@ import styles from '../screens/MainStyles.js';
 const FlatListItem = ({item, setCharacterCurrent, setShowModal}) => {
 
     return (
-        <SafeAreaView>
+        <SafeAreaView >
             <TouchableOpacity onPress={() => {
                 setCharacterCurrent(item);
                 setShowModal(true);
