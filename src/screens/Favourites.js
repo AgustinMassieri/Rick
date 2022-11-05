@@ -6,7 +6,6 @@ import ModalItem from '../components/ModalItem.js';
 import ModalComment from '../components/ModalComment.js';
 import { auth, db } from '../../config/firebase';
 import { collection, onSnapshot, query, deleteDoc, doc, where } from "firebase/firestore";
-import { TextInput } from 'react-native-paper';
 
 const Favorites = ({navigation}) => {
 
@@ -53,7 +52,7 @@ const Favorites = ({navigation}) => {
                 <TouchableOpacity onPress={ () => deleteFavCharacter(item)}>
                     <Image style={{position: 'absolute', marginLeft: '20%', width: 20, height: 25, resizeMode: 'contain'}} source={require('../../papelera.png')}/>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={ () => setShowCommentModal(true)}>
+                <TouchableOpacity onPress={ () => {setShowCommentModal(true); setCharacterCurrent(item)}}>
                     <Image style={{position: 'absolute', marginLeft: '40%', width: 20, height: 25, resizeMode: 'contain'}} source={require('../../comment.png')}/>
                 </TouchableOpacity>
             </View>           
@@ -65,7 +64,7 @@ const Favorites = ({navigation}) => {
             <Text style={{color: 'white', fontWeight: 'bold', fontSize: 20}}> Favorites </Text>
             <FlatList
                 style={{marginTop: 10, marginBottom:60}}
-                keyExtractor={(item, index) => item.id }
+                keyExtractor={item => item.id }
                 numColumns={2}
                 columnWrapperStyle={styles.row}
                 data={characters}
@@ -77,7 +76,7 @@ const Favorites = ({navigation}) => {
             </Modal>
 
             <Modal transparent={true} visible={showCommentModal} animationType="slide">
-                <ModalComment setShowCommentModal={setShowCommentModal}/>
+                <ModalComment setShowCommentModal={setShowCommentModal} characterCurrent={characterCurrent}/>
             </Modal>
         </SafeAreaView>
     )

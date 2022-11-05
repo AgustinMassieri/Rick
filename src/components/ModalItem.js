@@ -13,9 +13,12 @@ const ModalItem = ({setShowModal, characterCurrent}) => {
                 <Text style={styles.button}>{characterCurrent.status}</Text>
                 <Text style={styles.modalCharacterDescription}>Species: <Text style={{fontWeight: 'bold'}}>{characterCurrent.species}</Text></Text>          
                 {characterCurrent.type && (
-                <Text style={styles.modalCharacterDescription}>Type: <Text style={{fontWeight: 'bold'}}>{characterCurrent.type}</Text></Text>
+                    <Text style={styles.modalCharacterDescription}>Type: <Text style={{fontWeight: 'bold'}}>{characterCurrent.type}</Text></Text>
                 )}
                 <Text style={styles.modalCharacterDescription}>Gender: <Text style={{fontWeight: 'bold'}}>{characterCurrent.gender}</Text></Text>
+                {characterCurrent.comment && (
+                    <Text style={styles.modalCharacterDescription}>Comment: <Text style={{fontWeight: 'bold'}}>{characterCurrent.comment}</Text></Text>
+                )}
             </View>
         </View>
     )
