@@ -3,14 +3,17 @@ import {Text, Modal, SafeAreaView, FlatList, Image, TouchableOpacity, View} from
 import styles from './MainStyles.js';
 import FlatListItem from '../components/FlatListItem.js';
 import ModalItem from '../components/ModalItem.js';
+import ModalComment from '../components/ModalComment.js';
 import { auth, db } from '../../config/firebase';
 import { collection, onSnapshot, query, deleteDoc, doc, where } from "firebase/firestore";
+import { TextInput } from 'react-native-paper';
 
 const Favorites = ({navigation}) => {
 
     const [characters, setCharacters] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [characterCurrent, setCharacterCurrent] = useState("");
+    const [showCommentModal, setShowCommentModal] = useState(false);
 
     useEffect(() => {
         getData();
@@ -47,9 +50,11 @@ const Favorites = ({navigation}) => {
                             setCharacterCurrent={setCharacterCurrent} 
                             setShowModal={setShowModal}
                             />
-
                 <TouchableOpacity onPress={ () => deleteFavCharacter(item)}>
-                    <Image style={{marginLeft: '40%' ,position: 'fixed', width: 20, height:20}} source={require('../../papelera.png')}/>
+                    <Image style={{position: 'absolute', marginLeft: '20%', width: 20, height: 25, resizeMode: 'contain'}} source={require('../../papelera.png')}/>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={ () => setShowCommentModal(true)}>
+                    <Image style={{position: 'absolute', marginLeft: '40%', width: 20, height: 25, resizeMode: 'contain'}} source={require('../../comment.png')}/>
                 </TouchableOpacity>
             </View>           
         )
@@ -69,6 +74,10 @@ const Favorites = ({navigation}) => {
 
             <Modal transparent={true} visible={showModal} animationType="slide">
                 <ModalItem setShowModal={setShowModal} characterCurrent={characterCurrent}/>
+            </Modal>
+
+            <Modal transparent={true} visible={showCommentModal} animationType="slide">
+                <ModalComment setShowCommentModal={setShowCommentModal}/>
             </Modal>
         </SafeAreaView>
     )

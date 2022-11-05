@@ -125,6 +125,14 @@ const styles = StyleSheet.create({
       width: 20,
       height:20,
     },
+    input: {
+      borderBottomColor: 'white',
+      borderBottomWidth: 1,
+      margin: 10,
+      fontSize: 20,
+      width: 250,
+      color: 'white',
+    } 
   
   });
 
