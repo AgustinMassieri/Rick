@@ -1,8 +1,7 @@
 import { doc, setDoc, updateDoc } from 'firebase/firestore';
 import React from 'react';
 import { useState } from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
-import { TextInput } from 'react-native-paper';
+import {View, Text, TouchableOpacity, TextInput} from 'react-native';
 import { db, auth } from '../../config/firebase.js';
 import styles from '../screens/MainStyles.js';
 
@@ -22,11 +21,11 @@ const ModalComment = ({setShowCommentModal, characterCurrent}) => {
 
     return(
         <View style={styles.modalContainer}>
-            <View style={styles.modalCard}>
+            <View  style={styles.comment_modal} >
                 <Text style={styles.modalExit} onPress={() => setShowCommentModal(false)}>X</Text>
-                <TextInput style={{width: 300, height: 30, marginBottom: '3%', backgroundColor: '#585858'}} placeholder='Ingrese un comentario:' placeholderTextColor="white" value={comment} onChangeText={ (value) => setComment(value) }/>
+                <TextInput style={styles.comment_input_text} placeholder='Ingrese un comentario:' placeholderTextColor="white" value={comment} onChangeText={ (value) => setComment(value) }/>
                 <TouchableOpacity onPress={addComment}>
-                    <Text style={{fontSize: 18, fontWeight: 'bold', borderColor: 'white', padding: 8, borderStyle: 'solid', borderWidth: 2, color: 'white'}}>Agregar comentario</Text>
+                    <Text style={styles.comment_btn_text}>Agregar comentario</Text>
                 </TouchableOpacity> 
             </View>
         </View>

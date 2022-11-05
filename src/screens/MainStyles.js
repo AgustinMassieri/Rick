@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     },
     modalExit:{
       top:'3%',
-      marginLeft:210,
+      marginLeft:'80%',
       fontSize: 30,
       color: 'white',
     },
@@ -139,6 +139,35 @@ const styles = StyleSheet.create({
     },
     character_container: {
       marginTop: '10%'
+    },
+    comment_modal: {
+      width: '80%',
+      height: '20%',
+      borderRadius: 30,
+      borderStyle: 'solid',
+      borderWidth: 2,
+      borderColor: 'black',
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#585858',
+    },
+    comment_input_text: {
+      width: 300,
+      height: 30,
+      marginBottom: '3%',
+      borderColor: 'white',
+      backgroundColor: '#585858',
+      color: 'white',
+      fontSize: 18,
+    },
+    comment_btn_text: {
+      fontSize: 18,
+      fontWeight: 'bold',
+      borderColor: 'white',
+      padding: '3%',
+      borderStyle: 'solid',
+      borderWidth: 2,
+      color: 'white',
     }
   });
 
