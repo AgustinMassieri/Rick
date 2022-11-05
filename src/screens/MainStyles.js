@@ -132,8 +132,11 @@ const styles = StyleSheet.create({
       fontSize: 20,
       width: 250,
       color: 'white',
-    } 
-  
+    },
+    flatlist_style: {
+      marginBottom: '10%',
+      marginLeft: '8%'
+    }
   });
 
 export default styles;

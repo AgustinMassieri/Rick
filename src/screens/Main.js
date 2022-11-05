@@ -80,7 +80,7 @@ const Main = ({navigation}) => {
       <TextInput style={styles.searchBar} value={nameFilter} onChangeText={ (value) => {setNameFilter(value); setPageCurrent(1); setCharacters([]); if(value.length == 0){setDeleteEnable(false)}else{setDeleteEnable(true)}} } placeholder='Search for characters by name ...'></TextInput>            
       
       <Animated.FlatList
-        style={{marginTop: 10, marginBottom:60}}
+        style={styles.flatlist_style}
         onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { y: scrollY } } }],
           { useNativeDriver: true }
