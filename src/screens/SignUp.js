@@ -11,22 +11,31 @@ const SignUp = () => {
   const [successfulRegister, setSuccessfulRegister] = useState(false);
   const [errorMailAlreadyInUse, setErrorMailAlreadyInUse] = useState(false);
   const [errorInvalidEmail, setErrorInvalidEmail] = useState(false);
+  const [errorWeakPassword, setErrorWeakPassword] = useState(false);
 
   signUpUser = () =>{
     createUserWithEmailAndPassword(auth, email, password).then((res) => {
         setSuccessfulRegister(true);
         setErrorMailAlreadyInUse(false);
         setErrorInvalidEmail(false);
+        setErrorWeakPassword(false);
     }).catch((err) => {
         if (err.code == 'auth/email-already-in-use'){
-            setSuccessfulRegister(false);
-            setErrorMailAlreadyInUse(true);
-            setErrorInvalidEmail(false);
+          setSuccessfulRegister(false);
+          setErrorMailAlreadyInUse(true);
+          setErrorInvalidEmail(false);
+          setErrorWeakPassword(false);
         }else if (err.code == 'auth/invalid-email') {
-            setSuccessfulRegister(false);
-            setErrorMailAlreadyInUse(false);
-            setErrorInvalidEmail(true);
-        }
+          setSuccessfulRegister(false);
+          setErrorMailAlreadyInUse(false);
+          setErrorInvalidEmail(true);
+          setErrorWeakPassword(false);
+        }else if (err.code == 'auth/weak-password') {
+          setSuccessfulRegister(false);
+          setErrorMailAlreadyInUse(false);
+          setErrorInvalidEmail(false);
+          setErrorWeakPassword(true);
+      }
     })
   }
 
@@ -40,6 +49,7 @@ const SignUp = () => {
         {successfulRegister && (<Text style={{color: 'green'}}> Su usuario se genero de forma correcta! </Text>)}
         {errorMailAlreadyInUse && (<Text style={{color: 'red'}}> El mail ingresado ya esta en uso! </Text>)}
         {errorInvalidEmail && (<Text style={{color: 'red'}}> El mail ingresado no es valido! </Text>)}
+        {errorWeakPassword && (<Text style={{color: 'red'}}> La contraseña debe tener al menos 6 caracteres!</Text>)}
     </SafeAreaView>
   );
 }
