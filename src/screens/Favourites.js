@@ -44,8 +44,9 @@ const Favorites = ({navigation}) => {
 
     renderItem = ({item}) => {
         return(
-            <View>
-                <FlatListItem item={item} 
+            <View style={styles.character_container}>
+                <FlatListItem 
+                            item={item} 
                             setCharacterCurrent={setCharacterCurrent} 
                             setShowModal={setShowModal}
                             />
@@ -63,7 +64,7 @@ const Favorites = ({navigation}) => {
         <SafeAreaView style={styles.container}>
             <Text style={{color: 'white', fontWeight: 'bold', fontSize: 20}}> Favorites </Text>
             <FlatList
-                style={{marginTop: 10, marginBottom:60}}
+                style={styles.flatlist_style}
                 keyExtractor={(item, index) => item.id }
                 numColumns={2}
                 columnWrapperStyle={styles.row}

@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     row: {
       flex: 1,
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
     },
     button: {
       alignItems: 'center',
@@ -135,7 +135,10 @@ const styles = StyleSheet.create({
     },
     flatlist_style: {
       marginBottom: '10%',
-      marginLeft: '8%'
+      marginLeft: '8%',
+    },
+    character_container: {
+      marginTop: '10%'
     }
   });
 
