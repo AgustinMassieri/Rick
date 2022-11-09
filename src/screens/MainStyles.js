@@ -168,6 +168,15 @@ const styles = StyleSheet.create({
       borderStyle: 'solid',
       borderWidth: 2,
       color: 'white',
+    },
+    fav_img: {
+      transform: [{rotate:spin}],
+      marginLeft: '40%',
+      position: 'fixed',
+      width: 20,
+      height:20
+    }
+
     }
   });
 
