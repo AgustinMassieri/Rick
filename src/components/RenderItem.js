@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { TouchableOpacity, Animated, Image, Dimensions } from 'react-native';
+import { TouchableOpacity, Animated, Image, Dimensions, Easing } from 'react-native';
 import FlatListItem from './FlatListItem';
 import { db, auth } from '../../config/firebase';
 import { setDoc, doc, deleteDoc } from "firebase/firestore";
@@ -37,7 +37,20 @@ const RenderItem = memo(({item, index, scrollY, setCharacterCurrent, setShowModa
         console.error("Error adding document: ", e);
       }
     }   
-
+    spinValue = new Animated.Value(0);
+    Animated.timing(
+      this.spinValue,
+      {
+        toValue: 1,
+        duration: 500,
+        easing: Easing.linear,
+        useNativeDriver: true
+      }
+    ).start()
+    const spin = this.spinValue.interpolate({
+      inputRange: [0,1],
+      outputRange: ['0deg','360deg']
+    })
     const inputRange = [
       -1,
       0,
@@ -80,16 +93,18 @@ const RenderItem = memo(({item, index, scrollY, setCharacterCurrent, setShowModa
                     />
         {(isFavourite == false) && ( 
           <TouchableOpacity onPress={ () => addFavCharacter(item)}>
-            <Image style={{marginLeft: '40%' ,position: 'fixed', width: 20, height:20}} source={require('../../fav_unselected.png')}/>
+            <Animated.Image style={{transform: [{rotate:spin}],marginLeft: '40%' ,position: 'fixed', width: 20, height:20}} source={require('../../fav_unselected.png')}/>
           </TouchableOpacity>
         )}
         {(isFavourite == true) && ( 
           <TouchableOpacity onPress={ () => deleteFavCharacter(item)}>
-            <Image style={{marginLeft: '40%' ,position: 'fixed', width: 20, height:20}} source={require('../../fav_selected.png')}/>
+            <Animated.Image style={{transform: [{rotate:spin}],marginLeft: '40%' ,position: 'fixed', width: 20, height:20}} source={require('../../fav_selected.png')}/>
           </TouchableOpacity>
         )}
       </Animated.View>
     )
+
+    
   })
 
 export default RenderItem;
