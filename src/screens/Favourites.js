@@ -62,7 +62,7 @@ const Favorites = ({navigation}) => {
 
     return(
         <SafeAreaView style={styles.container}>
-            <Text style={{color: 'white', fontWeight: 'bold', fontSize: 25, marginTop: 20}}> Favorites </Text>
+            <Text style={{color: 'white', fontWeight: 'bold', fontSize: 20}}> Favorites </Text>
             <FlatList
                 style={styles.flatlist_style}
                 keyExtractor={(item, index) => item.id }

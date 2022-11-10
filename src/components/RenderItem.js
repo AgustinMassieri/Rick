@@ -94,12 +94,20 @@ const RenderItem = memo(({item, index, scrollY, setCharacterCurrent, setShowModa
                     />
         {(isFavourite == false) && ( 
           <TouchableOpacity onPress={ () => addFavCharacter(item)}>
-            <Animated.Image style={styles.fav_img} source={require('../../fav_unselected.png')}/>
+            <Animated.Image style={{transform: [{rotate:spin}],
+      marginLeft: '40%',
+      position: 'fixed',
+      width: 20,
+      height:20}} source={require('../../fav_unselected.png')}/>
           </TouchableOpacity>
         )}
         {(isFavourite == true) && ( 
           <TouchableOpacity onPress={ () => deleteFavCharacter(item)}>
-            <Animated.Image style={styles.fav_img} source={require('../../fav_selected.png')}/>
+            <Animated.Image style={{transform: [{rotate:spin}],
+      marginLeft: '40%',
+      position: 'fixed',
+      width: 20,
+      height:20}} source={require('../../fav_selected.png')}/>
           </TouchableOpacity>
         )}
       </Animated.View>
