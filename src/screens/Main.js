@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Modal, SafeAreaView, TextInput, Text, Image, Animated } from 'react-native';
+import { FlatList, Modal, SafeAreaView, TextInput, Text, Image, Animated, TouchableOpacity, View } from 'react-native';
 import AccordionItem from '../components/AccordionItem.js';
 import FiltersList from '../components/FilterList.js';
 import ModalItem from '../components/ModalItem.js';
 import styles from './MainStyles.js';
 import RenderItem from '../components/RenderItem.js';
-import { useFocusEffect } from '@react-navigation/native';
-
 
 const Main = ({navigation}) => {
 
@@ -57,10 +55,14 @@ const Main = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={{color:'white', fontWeight:'bold', fontSize: 25, marginTop: '2%'}} onPress={() => navigation.navigate('Favorites')}>
-        <Image style={styles.star_img} source={require('../../star.png')}/>
-        Favorites
-      </Text>
+      <TouchableOpacity onPress={() => navigation.navigate('Favorites')}>
+        <View style={styles.barra_favorites_text}>
+          <Text style={styles.favorites_text}>
+          <Image style={styles.star_img} source={require('../../star.png')}/>
+            Favorites
+          </Text>
+        </View>
+      </TouchableOpacity>
 
       <AccordionItem setPageCurrent={setPageCurrent}
                      setStatusFilter={setStatusFilter} 

@@ -11,13 +11,13 @@ const ModalItem = ({setShowModal, characterCurrent}) => {
                 <Text style={styles.modalCharacterName}>{characterCurrent.name}</Text>
                 <Image style={styles.image2} source={{uri: characterCurrent.image}}></Image>
                 <Text style={styles.button}>{characterCurrent.status}</Text>
-                <Text style={styles.modalCharacterDescription}>Species: <Text style={{fontWeight: 'bold'}}>{characterCurrent.species}</Text></Text>          
+                <Text style={styles.modalCharacterDescription}>Species: <Text style={styles.boldFont}>{characterCurrent.species}</Text></Text>          
                 {characterCurrent.type && (
-                    <Text style={styles.modalCharacterDescription}>Type: <Text style={{fontWeight: 'bold'}}>{characterCurrent.type}</Text></Text>
+                    <Text style={styles.modalCharacterDescription}>Type: <Text style={styles.boldFont}>{characterCurrent.type}</Text></Text>
                 )}
-                <Text style={styles.modalCharacterDescription}>Gender: <Text style={{fontWeight: 'bold'}}>{characterCurrent.gender}</Text></Text>
+                <Text style={styles.modalCharacterDescription}>Gender: <Text style={styles.boldFont}>{characterCurrent.gender}</Text></Text>
                 {characterCurrent.comment && (
-                    <Text style={styles.modalCharacterDescription}>Comment: <Text style={{fontWeight: 'bold'}}>{characterCurrent.comment}</Text></Text>
+                    <Text style={styles.modalCharacterDescription}>Comment: <Text style={styles.boldFont}>{characterCurrent.comment}</Text></Text>
                 )}
             </View>
         </View>

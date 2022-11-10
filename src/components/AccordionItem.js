@@ -49,10 +49,9 @@ const AccordionItem = ({setPageCurrent, setStatusFilter,
 
   return (
     <View style={styles.container}>
-      
       <TouchableOpacity style={styles.button} onPress={() => setShowContent(!showContent)}>
-        <View>
-          <Text style={{fontWeight: 'bold'}} >Filters</Text>
+        <View style>
+          <Text style={styles.filters_label} >Filters</Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => {
@@ -75,7 +74,7 @@ const AccordionItem = ({setPageCurrent, setStatusFilter,
         <View>
           <TouchableOpacity style={styles.button} onPress={() => setShowStatus(!showStatus)}>
             <View>
-              <Text  style={{fontWeight: 'bold'}}>Status</Text>
+              <Text  style={styles.filters_label}>Status</Text>
             </View>
           </TouchableOpacity>
           {showStatus && (
@@ -87,7 +86,7 @@ const AccordionItem = ({setPageCurrent, setStatusFilter,
 
           <TouchableOpacity style={styles.button} onPress={() => setShowGender(!showGender)}>
             <View>
-              <Text  style={{fontWeight: 'bold'}}>Gender</Text>
+              <Text  style={styles.filters_label}>Gender</Text>
             </View>
           </TouchableOpacity>
           {showGender && (
@@ -96,7 +95,7 @@ const AccordionItem = ({setPageCurrent, setStatusFilter,
 
           <TouchableOpacity style={styles.button} onPress={() => setShowType(!showType)}>
             <View>
-              <Text style={{fontWeight: 'bold'}}>Type</Text>
+              <Text style={styles.filters_label}>Type</Text>
             </View>
           </TouchableOpacity>
           {showType&& (
@@ -105,7 +104,7 @@ const AccordionItem = ({setPageCurrent, setStatusFilter,
 
           <TouchableOpacity style={styles.button} onPress={() => setShowSpecies(!showSpecies)}>
             <View>
-              <Text style={{fontWeight: 'bold'}}>Species</Text>
+              <Text style={styles.filters_label}>Species</Text>
             </View>
           </TouchableOpacity>
           {showSpecies&& (
@@ -122,8 +121,7 @@ const AccordionItem = ({setPageCurrent, setStatusFilter,
 export default AccordionItem;
 
 const styles = StyleSheet.create({
-
-  
+ 
   button: {
     borderRadius: 8,
     flexDirection: 'row',
@@ -136,16 +134,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     marginBottom: 5,
     fontWeight: 'bold',
+    borderColor: '#C0C0C0',
+    borderWidth: 1.2
   },
   text: {
     width: 140,
     color: 'white',
     fontSize: 15,
     paddingVertical:5,
-    //backgroundColor: 'blue',
     paddingHorizontal: 10,
     textAlign: 'center',
-
   },
   options: {
     marginBottom: 5,
@@ -170,5 +168,8 @@ const styles = StyleSheet.create({
     //backgroundColor: 'black',
     color: 'white',
     marginTop: '4%'
+  },
+  filters_label: {
+    fontWeight: 'bold'
   }
 });

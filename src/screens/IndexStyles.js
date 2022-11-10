@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
     subtitle:{
       fontStyle: 'italic',
       color: 'white',
-      marginBottom: 20
+      marginBottom: '8%'
     },
     container: {
       flex: 1,
@@ -30,7 +30,6 @@ const styles = StyleSheet.create({
       fontSize: 20,
       width: 250,
       color: 'white',
-      
     },
     button: {
       borderColor: 'white',
@@ -40,6 +39,16 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
       fontSize: 20,
       color: 'white'
+    },
+    messageNotOk: {
+      color: '#FF0000', 
+      marginTop: '2%', 
+      fontSize: 18
+    },
+    messageOk: {
+      color: 'lightgreen', 
+      marginTop: '2%', 
+      fontSize: 18
     }
 });
 

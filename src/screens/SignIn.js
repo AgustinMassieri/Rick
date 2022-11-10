@@ -33,8 +33,8 @@ const SignIn = ({navigation}) => {
       <TouchableOpacity onPress={signUpUser}>
         <Text style={styles.button}>Enter!</Text>
       </TouchableOpacity>
-      {successfulLogin && (<Text style={{color: 'green'}}> Login exitoso! </Text>)}
-      {errorLogin && (<Text style={{color: 'red'}}> Usuario incorrecto! </Text>)}
+      {successfulLogin && (<Text style={styles.messageOk}> Login exitoso! </Text>)}
+      {errorLogin && (<Text style={styles.messageNotOk}> Usuario incorrecto! </Text>)}
     </SafeAreaView>
   );
 }

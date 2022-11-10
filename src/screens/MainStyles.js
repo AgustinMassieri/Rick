@@ -105,14 +105,14 @@ const styles = StyleSheet.create({
     },
     searchBar: {
       borderRadius:10,
-      borderColor: 'black', 
+      borderColor: '#C0C0C0', 
       borderStyle:'solid',
       borderWidth: 2, 
       backgroundColor:'white', 
       width: 250, 
       height: 30, 
       paddingLeft: 10,
-      marginTop: 10,
+      marginTop: '4%',
       marginBottom: 15
     },
     favorite_img: {
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     },
     comment_modal: {
       width: '80%',
-      height: '25%',
+      height: '28%',
       borderRadius: 30,
       borderStyle: 'solid',
       borderWidth: 2,
@@ -171,6 +171,21 @@ const styles = StyleSheet.create({
       borderStyle: 'solid',
       borderWidth: 2,
       color: 'white',
+    },
+    favorites_text: {
+      position: 'absolute', 
+      color:'white', 
+      fontWeight:'bold', 
+      fontSize: 25
+    },
+    barra_favorites_text: {
+      marginBottom: '8%', 
+      alignContent: 'center', 
+      alignItems: 'center', 
+      marginTop: '4%'
+    },
+    boldFont: {
+      fontWeight: 'bold'
     }
   });
 

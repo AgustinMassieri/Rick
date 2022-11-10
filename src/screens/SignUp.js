@@ -46,10 +46,10 @@ const SignUp = () => {
         <TouchableOpacity onPress={signUpUser}>
             <Text style={styles.button}>Sign up!</Text>
         </TouchableOpacity>
-        {successfulRegister && (<Text style={{color: 'green'}}> Su usuario se genero de forma correcta! </Text>)}
-        {errorMailAlreadyInUse && (<Text style={{color: 'red'}}> El mail ingresado ya esta en uso! </Text>)}
-        {errorInvalidEmail && (<Text style={{color: 'red'}}> El mail ingresado no es valido! </Text>)}
-        {errorWeakPassword && (<Text style={{color: 'red'}}> La contraseña debe tener al menos 6 caracteres!</Text>)}
+        {successfulRegister && (<Text style={styles.signUpOk}> Su usuario se genero de forma correcta! </Text>)}
+        {errorMailAlreadyInUse && (<Text style={styles.errorSignUp}> El mail ingresado ya esta en uso! </Text>)}
+        {errorInvalidEmail && (<Text style={styles.errorSignUp}> El mail ingresado no es valido! </Text>)}
+        {errorWeakPassword && (<Text style={styles.errorSignUp}> La contraseña debe tener al menos 6 caracteres!</Text>)}
     </SafeAreaView>
   );
 }
