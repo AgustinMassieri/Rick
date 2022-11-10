@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-import Index from "./Index";
 
 const styles = StyleSheet.create({
     modalContainer: {
@@ -24,11 +23,11 @@ const styles = StyleSheet.create({
       backgroundColor: '#585858',
     },
     modalExit:{
-      top:'3%',
+      top:'1%',
       marginLeft:'80%',
       fontSize: 30,
       color: 'white',
-    },
+     },
     modalCharacterName:{
       marginBottom:10,
       fontSize: 25,
@@ -55,7 +54,7 @@ const styles = StyleSheet.create({
       color: 'white',
       width: 160,
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
     },
     image: {
       width: 100,
@@ -81,7 +80,7 @@ const styles = StyleSheet.create({
     row: {
       flex: 1,
       justifyContent: 'center',
-      alignItems: 'center',
+      marginBottom: 40,
     },
     button: {
       alignItems: 'center',
@@ -113,7 +112,8 @@ const styles = StyleSheet.create({
       width: 250, 
       height: 30, 
       paddingLeft: 10,
-      marginTop: 10
+      marginTop: 10,
+      marginBottom: 15
     },
     favorite_img: {
       marginLeft: '40%',
@@ -138,27 +138,30 @@ const styles = StyleSheet.create({
       marginLeft: '8%',
     },
     character_container: {
-      marginTop: '10%'
+      marginTop: '10%',
     },
     comment_modal: {
       width: '80%',
-      height: '20%',
+      height: '25%',
       borderRadius: 30,
       borderStyle: 'solid',
       borderWidth: 2,
-      borderColor: 'black',
+      borderColor: 'white',
       justifyContent: 'center',
       alignItems: 'center',
       backgroundColor: '#585858',
     },
     comment_input_text: {
-      width: 300,
+      width: '80%',
       height: 30,
-      marginBottom: '3%',
+      marginBottom: '5%',
       borderColor: 'white',
       backgroundColor: '#585858',
       color: 'white',
       fontSize: 18,
+      marginLeft: '10%',
+      marginRight: '10%',
+      borderBottomWidth: 2
     },
     comment_btn_text: {
       fontSize: 18,
