@@ -5,10 +5,14 @@ import FiltersList from '../components/FilterList.js';
 import ModalItem from '../components/ModalItem.js';
 import styles from './MainStyles.js';
 import RenderItem from '../components/RenderItem.js';
+import { fetchCharacters, setCharactersList } from '../store/slices/characters/index.js';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Main = ({navigation}) => {
 
-  const [characters, setCharacters] = useState([]);
+  const dispatch = useDispatch();
+  const { list: characters } = useSelector(state => state.characters);
+
   const [pageCurrent, setPageCurrent] = useState(1);
   const [statusFilter, setStatusFilter] = useState("");
   const [genderFilter, setGenderFilter] = useState("");
@@ -24,7 +28,7 @@ const Main = ({navigation}) => {
   const scrollY = React.useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    getData();
+    dispatch(fetchCharacters(apiURL));
   }, [apiURL]);
 
   useEffect(() => {
@@ -33,14 +37,6 @@ const Main = ({navigation}) => {
     });
     return unsubscribe;
   }, [navigation]);
-
-  getData = async() => {
-    fetch(apiURL) 
-      .then(response => response.json())
-      .then(response => {
-        setCharacters([...characters, ...response.results]);
-      })
-  };
 
   renderItem = ({item, index}) => {
     return(
@@ -69,7 +65,6 @@ const Main = ({navigation}) => {
                      setGenderFilter={setGenderFilter} 
                      setTypeFilter={setTypeFilter} 
                      setSpeciesFilter={setSpeciesFilter}
-                     setCharacters={setCharacters}
                      setNameFilter={setNameFilter}
                      deleteEnable={deleteEnable}
                      setDeleteEnable={setDeleteEnable}
@@ -77,10 +72,10 @@ const Main = ({navigation}) => {
                      genderFilter={genderFilter}
                      typeFilter={typeFilter}
                      speciesFilter={speciesFilter}
-                     />
+      />
 
-      <TextInput style={styles.searchBar} value={nameFilter} onChangeText={ (value) => {setNameFilter(value); setPageCurrent(1); setCharacters([]); if(value.length == 0){setDeleteEnable(false)}else{setDeleteEnable(true)}} } placeholder='Search for characters by name ...'></TextInput>            
-      
+      <TextInput style={styles.searchBar} value={nameFilter} onChangeText={ (value) => {setNameFilter(value); setPageCurrent(1); dispatch(setCharactersList([])); if(value.length == 0){setDeleteEnable(false)}else{setDeleteEnable(true)}} } placeholder='Search for characters by name ...'></TextInput>            
+
       <Animated.FlatList
         style={styles.flatlist_style}
         onScroll={Animated.event(
@@ -99,11 +94,13 @@ const Main = ({navigation}) => {
       <FiltersList statusFilter={statusFilter} 
                    genderFilter={genderFilter} 
                    typeFilter={typeFilter}
-                   speciesFilter={speciesFilter}/>       
+                   speciesFilter={speciesFilter}
+      />       
 
       <Modal transparent={true} visible={showModal} animationType="slide">
         <ModalItem setShowModal={setShowModal} characterCurrent={characterCurrent}/>
       </Modal>   
+      
     </SafeAreaView>
   )
 }
