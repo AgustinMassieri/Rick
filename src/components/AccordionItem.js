@@ -4,11 +4,15 @@ import status from '../../filterValues/statusValues.js'
 import gender from '../../filterValues/genderValues.js'
 import species from '../../filterValues/speciesValues.js'
 import types from '../../filterValues/typesValues.js'
+import { setCharactersList } from '../store/slices/characters/index.js';
+import { useDispatch } from 'react-redux';
 
 const AccordionItem = ({setPageCurrent, setStatusFilter, 
-  setGenderFilter, setTypeFilter, setSpeciesFilter, setCharacters,
+  setGenderFilter, setTypeFilter, setSpeciesFilter,
   setNameFilter, deleteEnable, setDeleteEnable,
   statusFilter, genderFilter, typeFilter, speciesFilter}) => {
+
+  const dispatch = useDispatch();
 
   const [showContent, setShowContent] = useState(false);
   const [showStatus, setShowStatus] = useState(false);
@@ -31,7 +35,7 @@ const AccordionItem = ({setPageCurrent, setStatusFilter,
     return data.map( (element) => { 
       return (
         <View key={element.key}>
-          <TouchableOpacity onPress={() => {setCharacters([]);setPageCurrent(1); 
+          <TouchableOpacity onPress={() => {dispatch(setCharactersList([])); setPageCurrent(1); 
             if( filterValue == '') {
               setFilter(element.value); 
               updateDeleteButton(element.value, otherFilterValue1, otherFilterValue2, otherFilterValue3, setDeleteEnable);
@@ -62,7 +66,7 @@ const AccordionItem = ({setPageCurrent, setStatusFilter,
             setSpeciesFilter("");
             setNameFilter("");
             setPageCurrent(1);
-            setCharacters([]);
+            dispatch(setCharactersList([]));
             Vibration.vibrate(10*100000000);
             setDeleteEnable(false);
           }
@@ -165,7 +169,6 @@ const styles = StyleSheet.create({
     width: '80%',
     justifyContent: 'center',
     alignItems: 'center',
-    //backgroundColor: 'black',
     color: 'white',
     marginTop: '4%'
   },

@@ -7,21 +7,26 @@ import Main from './src/screens/Main.js';
 import Favorites from './src/screens/Favourites.js';
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { NavigationContainer } from '@react-navigation/native'
+import { Provider } from 'react-redux';
+import store from './src/store';
 
 const App = () => {
 
   const Stack = createNativeStackNavigator();
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen name="Index" component={Index}/>
-        <Stack.Screen name="SignIn" component={SignIn}/>
-        <Stack.Screen name="SignUp" component={SignUp}/>
-        <Stack.Screen name="Main" component={Main}/>
-        <Stack.Screen name="Favorites" component={Favorites}/>
-      </Stack.Navigator>
-    </NavigationContainer>        
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{headerShown: false}}>
+          <Stack.Screen name="Index" component={Index}/>
+          <Stack.Screen name="SignIn" component={SignIn}/>
+          <Stack.Screen name="SignUp" component={SignUp}/>
+          <Stack.Screen name="Main" component={Main}/>
+          <Stack.Screen name="Favorites" component={Favorites}/>
+        </Stack.Navigator>
+      </NavigationContainer>  
+    </Provider>
+      
   )
 };
 
