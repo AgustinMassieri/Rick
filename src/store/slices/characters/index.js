@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 export const charactersSlice = createSlice({
     name: 'characters',
@@ -10,7 +10,8 @@ export const charactersSlice = createSlice({
         statusFilter: '', 
         genderFilter: '',
         typeFilter: '',
-        speciesFilter: ''
+        speciesFilter: '',
+        currentCharacter: ''
     },
     reducers: {
         addCharactersToList: (state, action) => {
@@ -49,12 +50,15 @@ export const charactersSlice = createSlice({
         },
         setNameFilter: (state, action) => {
             state.nameFilter = action.payload;
+        },
+        setCurrentCharacter: (state, action) => {
+            state.currentCharacter = action.payload;
         }
      }
 })
 
 export const { addCharactersToList, setCharactersList, setShowCharacterModal, incrementCurrentPage, resetCurrentPage,
-                resetFilters, setStatusFilter, setGenderFilter, setTypeFilter, setSpeciesFilter, setNameFilter } = charactersSlice.actions;
+                resetFilters, setStatusFilter, setGenderFilter, setTypeFilter, setSpeciesFilter, setNameFilter, setCurrentCharacter } = charactersSlice.actions;
 
 export default charactersSlice.reducer;
 

@@ -6,7 +6,7 @@ import { setDoc, doc, deleteDoc } from "firebase/firestore";
 import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import { useState } from 'react';
 
-const RenderItem = memo(({item, index, scrollY, setCharacterCurrent}) => {
+const RenderItem = memo(({item, index, scrollY}) => {
 
     const { height } = Dimensions.get("screen");
     const [isFavourite, setIsFavourite] = useState(false);
@@ -86,10 +86,7 @@ const RenderItem = memo(({item, index, scrollY, setCharacterCurrent}) => {
         transform: [{ scale: scale }, { translateX: Offset }],
         opacity: opacity,
       }}>
-        <FlatListItem 
-                    item={item} 
-                    setCharacterCurrent={setCharacterCurrent} 
-                    />
+        <FlatListItem item={item}/>
         {(isFavourite == false) && ( 
           <TouchableOpacity onPress={ () => addFavCharacter(item)}>
             <Animated.Image style={{transform: [{rotate:spin}],

@@ -13,7 +13,6 @@ const Main = ({navigation}) => {
   const dispatch = useDispatch();
   const { list: characters, showCharacterModal, currentPage, nameFilter, statusFilter, genderFilter, typeFilter, speciesFilter } = useSelector(state => state.characters);
 
-  const [characterCurrent, setCharacterCurrent] = useState("");
   const [deleteEnable, setDeleteEnable] = useState(false);
   const [value, setValue] = useState(false);
 
@@ -32,7 +31,7 @@ const Main = ({navigation}) => {
 
   renderItem = ({item, index}) => {
     return(
-      <RenderItem item={item} index={index} scrollY={scrollY} setCharacterCurrent={setCharacterCurrent}/>
+      <RenderItem item={item} index={index} scrollY={scrollY}/>
     )
   }
 
@@ -74,7 +73,7 @@ const Main = ({navigation}) => {
       <FiltersList/>       
 
       <Modal transparent={true} visible={showCharacterModal} animationType="slide">
-        <ModalItem characterCurrent={characterCurrent}/>
+        <ModalItem/>
       </Modal>   
       
     </SafeAreaView>
