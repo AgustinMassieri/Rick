@@ -1,15 +1,18 @@
 import React from 'react';
 import {Text, Image, TouchableOpacity, SafeAreaView} from 'react-native';
+import { useDispatch } from 'react-redux';
 import styles from '../screens/MainStyles.js';
+import { setShowCharacterModal } from '../store/slices/characters/index.js';
 
+const FlatListItem = ({item, setCharacterCurrent}) => {
 
-const FlatListItem = ({item, setCharacterCurrent, setShowModal}) => {
+    const dispatch = useDispatch();
 
     return (
         <SafeAreaView >
             <TouchableOpacity onPress={() => {
                 setCharacterCurrent(item);
-                setShowModal(true);
+                dispatch(setShowCharacterModal(true));
                 }}>
                 <Text style={styles.texto}>{item.name}</Text>
                 <Image style={styles.image} source={{uri: item.image}} />

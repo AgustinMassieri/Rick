@@ -5,31 +5,23 @@ import FiltersList from '../components/FilterList.js';
 import ModalItem from '../components/ModalItem.js';
 import styles from './MainStyles.js';
 import RenderItem from '../components/RenderItem.js';
-import { fetchCharacters, setCharactersList } from '../store/slices/characters/index.js';
+import { fetchCharacters, setCharactersList, incrementCurrentPage, resetCurrentPage, setNameFilter } from '../store/slices/characters/index.js';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Main = ({navigation}) => {
 
   const dispatch = useDispatch();
-  const { list: characters } = useSelector(state => state.characters);
+  const { list: characters, showCharacterModal, currentPage, nameFilter, statusFilter, genderFilter, typeFilter, speciesFilter } = useSelector(state => state.characters);
 
-  const [pageCurrent, setPageCurrent] = useState(1);
-  const [statusFilter, setStatusFilter] = useState("");
-  const [genderFilter, setGenderFilter] = useState("");
-  const [typeFilter, setTypeFilter] = useState("");
-  const [speciesFilter, setSpeciesFilter] = useState("");
-  const [showModal, setShowModal] = useState(false);
   const [characterCurrent, setCharacterCurrent] = useState("");
-  const [nameFilter, setNameFilter] = useState("");
   const [deleteEnable, setDeleteEnable] = useState(false);
   const [value, setValue] = useState(false);
 
-  const apiURL = 'https://rickandmortyapi.com/api/character/?page=' + pageCurrent + '&name=' + nameFilter + '&status=' + statusFilter + '&gender=' + genderFilter + '&type=' + typeFilter + '&species=' + speciesFilter;
   const scrollY = React.useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    dispatch(fetchCharacters(apiURL));
-  }, [apiURL]);
+    dispatch(fetchCharacters(currentPage, nameFilter, statusFilter, genderFilter, typeFilter, speciesFilter));
+  }, [currentPage, nameFilter, statusFilter, genderFilter, typeFilter, speciesFilter]);
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
@@ -40,12 +32,12 @@ const Main = ({navigation}) => {
 
   renderItem = ({item, index}) => {
     return(
-      <RenderItem item={item} index={index} scrollY={scrollY} setCharacterCurrent={setCharacterCurrent} setShowModal={setShowModal} />
+      <RenderItem item={item} index={index} scrollY={scrollY} setCharacterCurrent={setCharacterCurrent}/>
     )
   }
 
   handlerLoadMore = () =>{
-    setPageCurrent(pageCurrent+1);
+    dispatch(incrementCurrentPage());
     setDeleteEnable(true);
   }
 
@@ -60,21 +52,9 @@ const Main = ({navigation}) => {
         </View>
       </TouchableOpacity>
 
-      <AccordionItem setPageCurrent={setPageCurrent}
-                     setStatusFilter={setStatusFilter} 
-                     setGenderFilter={setGenderFilter} 
-                     setTypeFilter={setTypeFilter} 
-                     setSpeciesFilter={setSpeciesFilter}
-                     setNameFilter={setNameFilter}
-                     deleteEnable={deleteEnable}
-                     setDeleteEnable={setDeleteEnable}
-                     statusFilter={statusFilter}
-                     genderFilter={genderFilter}
-                     typeFilter={typeFilter}
-                     speciesFilter={speciesFilter}
-      />
+      <AccordionItem deleteEnable={deleteEnable} setDeleteEnable={setDeleteEnable}/>
 
-      <TextInput style={styles.searchBar} value={nameFilter} onChangeText={ (value) => {setNameFilter(value); setPageCurrent(1); dispatch(setCharactersList([])); if(value.length == 0){setDeleteEnable(false)}else{setDeleteEnable(true)}} } placeholder='Search for characters by name ...'></TextInput>            
+      <TextInput style={styles.searchBar} value={nameFilter} onChangeText={ (value) => {dispatch(setNameFilter(value)); dispatch(resetCurrentPage()); dispatch(setCharactersList([])); if(value.length == 0){setDeleteEnable(false)}else{setDeleteEnable(true)}} } placeholder='Search for characters by name ...'></TextInput>            
 
       <Animated.FlatList
         style={styles.flatlist_style}
@@ -91,14 +71,10 @@ const Main = ({navigation}) => {
         onEndReached={handlerLoadMore}
       />
 
-      <FiltersList statusFilter={statusFilter} 
-                   genderFilter={genderFilter} 
-                   typeFilter={typeFilter}
-                   speciesFilter={speciesFilter}
-      />       
+      <FiltersList/>       
 
-      <Modal transparent={true} visible={showModal} animationType="slide">
-        <ModalItem setShowModal={setShowModal} characterCurrent={characterCurrent}/>
+      <Modal transparent={true} visible={showCharacterModal} animationType="slide">
+        <ModalItem characterCurrent={characterCurrent}/>
       </Modal>   
       
     </SafeAreaView>

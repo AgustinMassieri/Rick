@@ -1,13 +1,12 @@
 import React, { memo } from 'react';
-import { TouchableOpacity, Animated, Image, Dimensions, Easing } from 'react-native';
+import { TouchableOpacity, Animated, Dimensions, Easing } from 'react-native';
 import FlatListItem from './FlatListItem';
 import { db, auth } from '../../config/firebase';
 import { setDoc, doc, deleteDoc } from "firebase/firestore";
 import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import { useState } from 'react';
-import styles from '../screens/IndexStyles';
 
-const RenderItem = memo(({item, index, scrollY, setCharacterCurrent, setShowModal}) => {
+const RenderItem = memo(({item, index, scrollY, setCharacterCurrent}) => {
 
     const { height } = Dimensions.get("screen");
     const [isFavourite, setIsFavourite] = useState(false);
@@ -90,7 +89,6 @@ const RenderItem = memo(({item, index, scrollY, setCharacterCurrent, setShowModa
         <FlatListItem 
                     item={item} 
                     setCharacterCurrent={setCharacterCurrent} 
-                    setShowModal={setShowModal}
                     />
         {(isFavourite == false) && ( 
           <TouchableOpacity onPress={ () => addFavCharacter(item)}>

@@ -1,13 +1,18 @@
 import React from 'react';
 import {View, Text, Image} from 'react-native';
 import styles from '../screens/MainStyles.js';
+import { setShowCharacterModal } from '../store/slices/characters/index.js';
+import { useDispatch } from 'react-redux';
 
-const ModalItem = ({setShowModal, characterCurrent}) => {
+
+const ModalItem = ({characterCurrent}) => {
+
+    const dispatch = useDispatch();
 
     return(
         <View style={styles.modalContainer}>
             <View style={styles.modalCard}>
-                <Text style={styles.modalExit} onPress={() => setShowModal(false)}>X</Text>
+                <Text style={styles.modalExit} onPress={() => dispatch(setShowCharacterModal(false))}>X</Text>
                 <Text style={styles.modalCharacterName}>{characterCurrent.name}</Text>
                 <Image style={styles.image2} source={{uri: characterCurrent.image}}></Image>
                 <Text style={styles.button}>{characterCurrent.status}</Text>

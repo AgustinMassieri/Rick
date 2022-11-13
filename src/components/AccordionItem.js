@@ -4,15 +4,13 @@ import status from '../../filterValues/statusValues.js'
 import gender from '../../filterValues/genderValues.js'
 import species from '../../filterValues/speciesValues.js'
 import types from '../../filterValues/typesValues.js'
-import { setCharactersList } from '../store/slices/characters/index.js';
-import { useDispatch } from 'react-redux';
+import { setCharactersList, resetCurrentPage, resetFilters, setGenderFilter, setStatusFilter, setTypeFilter, setSpeciesFilter } from '../store/slices/characters/index.js';
+import { useDispatch, useSelector } from 'react-redux';
 
-const AccordionItem = ({setPageCurrent, setStatusFilter, 
-  setGenderFilter, setTypeFilter, setSpeciesFilter,
-  setNameFilter, deleteEnable, setDeleteEnable,
-  statusFilter, genderFilter, typeFilter, speciesFilter}) => {
+const AccordionItem = ({deleteEnable, setDeleteEnable}) => {
 
   const dispatch = useDispatch();
+  const { statusFilter, speciesFilter, typeFilter, genderFilter } = useSelector(state => state.characters);
 
   const [showContent, setShowContent] = useState(false);
   const [showStatus, setShowStatus] = useState(false);
@@ -35,12 +33,12 @@ const AccordionItem = ({setPageCurrent, setStatusFilter,
     return data.map( (element) => { 
       return (
         <View key={element.key}>
-          <TouchableOpacity onPress={() => {dispatch(setCharactersList([])); setPageCurrent(1); 
+          <TouchableOpacity onPress={() => {dispatch(setCharactersList([])); dispatch(resetCurrentPage()); 
             if( filterValue == '') {
-              setFilter(element.value); 
+              dispatch(setFilter(element.value)); 
               updateDeleteButton(element.value, otherFilterValue1, otherFilterValue2, otherFilterValue3, setDeleteEnable);
             }else{
-              setFilter('');
+              dispatch(setFilter(''));
               updateDeleteButton('', otherFilterValue1, otherFilterValue2, otherFilterValue3, setDeleteEnable);
               
             }}}>
@@ -60,12 +58,8 @@ const AccordionItem = ({setPageCurrent, setStatusFilter,
       </TouchableOpacity>
       <TouchableOpacity onPress={() => {
           if(deleteEnable){
-            setStatusFilter("");
-            setGenderFilter("");
-            setTypeFilter("");
-            setSpeciesFilter("");
-            setNameFilter("");
-            setPageCurrent(1);
+            dispatch(resetFilters());
+            dispatch(resetCurrentPage());
             dispatch(setCharactersList([]));
             Vibration.vibrate(10*100000000);
             setDeleteEnable(false);

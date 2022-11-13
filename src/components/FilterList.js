@@ -1,8 +1,12 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import { View, Text } from 'react-native';
+import { useSelector } from 'react-redux';
 import styles from '../screens/MainStyles.js';
 
-const FiltersList = ({statusFilter, genderFilter, typeFilter, speciesFilter}) => {
+const FiltersList = () => {
+
+    const { statusFilter, speciesFilter, typeFilter, genderFilter } = useSelector(state => state.characters);
+
     return(
         <View style={{left:-50,flexDirection:'row',maxWidth:250}}>
             <Text style={styles.filteredBy}>Filtered by:</Text>
