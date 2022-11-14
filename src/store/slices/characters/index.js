@@ -5,13 +5,16 @@ export const charactersSlice = createSlice({
     initialState: {
         list: [],
         showCharacterModal: false,
+        showCommentModal: false,
         currentPage: 1,
         nameFilter: '',
         statusFilter: '', 
         genderFilter: '',
         typeFilter: '',
         speciesFilter: '',
-        currentCharacter: ''
+        currentCharacter: '',
+        favoriteCharacters: [],
+        inputCommentModal: ''
     },
     reducers: {
         addCharactersToList: (state, action) => {
@@ -53,12 +56,26 @@ export const charactersSlice = createSlice({
         },
         setCurrentCharacter: (state, action) => {
             state.currentCharacter = action.payload;
+        },
+        setFavouriteCharactersList: (state, action) => {
+            state.favoriteCharacters = action.payload;
+        },
+        emptyFavouriteCharactersList: (state) => {
+            state.favoriteCharacters = state.favoriteCharacters.splice(0, state.favoriteCharacters.length);
+        },
+        setShowCommentModal: (state, action) => {
+             state.showCommentModal = action.payload;
+        },
+        setInputCommentModal: (state, action) => {
+            state.inputCommentModal = action.payload;
         }
      }
 })
 
 export const { addCharactersToList, setCharactersList, setShowCharacterModal, incrementCurrentPage, resetCurrentPage,
-                resetFilters, setStatusFilter, setGenderFilter, setTypeFilter, setSpeciesFilter, setNameFilter, setCurrentCharacter } = charactersSlice.actions;
+                resetFilters, setStatusFilter, setGenderFilter, setTypeFilter, setSpeciesFilter, setNameFilter,
+                setCurrentCharacter, setFavouriteCharactersList, emptyFavouriteCharactersList, setShowCommentModal,
+                setInputCommentModal } = charactersSlice.actions;
 
 export default charactersSlice.reducer;
 

@@ -1,25 +1,29 @@
-import { doc, setDoc, updateDoc } from 'firebase/firestore';
+import { doc, updateDoc } from 'firebase/firestore';
 import React from 'react';
 import { useState } from 'react';
 import {View, Text, TouchableOpacity, TextInput} from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import { db, auth } from '../../config/firebase.js';
 import styles from '../screens/MainStyles.js';
+import { setInputCommentModal, setShowCommentModal } from '../store/slices/characters/index.js';
 
-const ModalComment = ({setShowCommentModal, characterCurrent}) => {
+const ModalComment = () => {
 
-    const [comment, setComment] = useState('');
+    const dispatch = useDispatch();
+    const { currentCharacter, inputCommentModal } = useSelector(state => state.characters);
+
     const [errorEmptyComment, setErrorEmptyComment] = useState(false);
 
     async function addComment (){
         try {
-          if(comment == ''){
+          if(inputCommentModal == ''){
             setErrorEmptyComment(true);
           } else{
-            const docRef = await updateDoc(doc(db, "Characters", characterCurrent.name+' - '+auth.currentUser.uid), {
-                comment: comment
+            const docRef = await updateDoc(doc(db, "Characters", currentCharacter.name+' - '+auth.currentUser.uid), {
+                comment: inputCommentModal
               });
-              setComment('');
-              setShowCommentModal(false);
+              dispatch(setInputCommentModal(''));
+              dispatch(setShowCommentModal(false));
               setErrorEmptyComment(false);
           }
           
@@ -31,8 +35,8 @@ const ModalComment = ({setShowCommentModal, characterCurrent}) => {
     return(
         <View style={styles.modalContainer}>
             <View  style={styles.comment_modal} >
-                <Text style={styles.modalExit} onPress={() => setShowCommentModal(false)}>X</Text>
-                <TextInput style={styles.comment_input_text} placeholder='Ingrese un comentario:' placeholderTextColor="white" value={comment} onChangeText={ (value) => setComment(value) }/>
+                <Text style={styles.modalExit} onPress={() => dispatch(setShowCommentModal(false))}>X</Text>
+                <TextInput style={styles.comment_input_text} placeholder='Ingrese un comentario:' placeholderTextColor="white" value={inputCommentModal} onChangeText={ (value) => dispatch(setInputCommentModal(value)) }/>
                 <TouchableOpacity onPress={addComment}>
                     <Text style={styles.comment_btn_text}>Agregar comentario</Text>
                 </TouchableOpacity> 
