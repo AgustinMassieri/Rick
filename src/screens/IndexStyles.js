@@ -43,7 +43,8 @@ const styles = StyleSheet.create({
     messageNotOk: {
       color: '#FF0000', 
       marginTop: '2%', 
-      fontSize: 18
+      fontSize: 18,
+      textAlign: 'center'
     },
     messageOk: {
       color: 'lightgreen', 
