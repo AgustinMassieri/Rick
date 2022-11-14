@@ -14,7 +14,13 @@ export const charactersSlice = createSlice({
         speciesFilter: '',
         currentCharacter: '',
         favoriteCharacters: [],
-        inputCommentModal: ''
+        inputCommentModal: '',
+        deleteButtonEnable: false,
+        openAccordionFilters: false,
+        openAccordionStatusFilter: false,
+        openAccordionGenderFilter: false,
+        openAccordionTypeFilter: false,
+        openAccordionSpeciesFilter: false,
     },
     reducers: {
         addCharactersToList: (state, action) => {
@@ -68,6 +74,24 @@ export const charactersSlice = createSlice({
         },
         setInputCommentModal: (state, action) => {
             state.inputCommentModal = action.payload;
+        },
+        setDeleteButtonEnable: (state, action) => {
+            state.deleteButtonEnable = action.payload;
+        },
+        setOpenAccordionFilters: (state, action) => {
+            state.openAccordionFilters = action.payload;
+        },
+        setOpenAccordionStatusFilter: (state, action) => {
+            state.openAccordionStatusFilter = action.payload;
+        },
+        setOpenAccordionGenderFilter: (state, action) => {
+            state.openAccordionGenderFilter = action.payload;
+        },
+        setOpenAccordionTypeFilter: (state, action) => {
+            state.openAccordionTypeFilter = action.payload;
+        },
+        setOpenAccordionSpeciesFilter: (state, action) => {
+            state.openAccordionSpeciesFilter = action.payload;
         }
      }
 })
@@ -75,7 +99,8 @@ export const charactersSlice = createSlice({
 export const { addCharactersToList, setCharactersList, setShowCharacterModal, incrementCurrentPage, resetCurrentPage,
                 resetFilters, setStatusFilter, setGenderFilter, setTypeFilter, setSpeciesFilter, setNameFilter,
                 setCurrentCharacter, setFavouriteCharactersList, emptyFavouriteCharactersList, setShowCommentModal,
-                setInputCommentModal } = charactersSlice.actions;
+                setInputCommentModal, setDeleteButtonEnable, setOpenAccordionFilters, setOpenAccordionStatusFilter,
+                setOpenAccordionGenderFilter, setOpenAccordionTypeFilter, setOpenAccordionSpeciesFilter } = charactersSlice.actions;
 
 export default charactersSlice.reducer;
 

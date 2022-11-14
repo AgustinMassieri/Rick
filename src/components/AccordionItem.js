@@ -1,29 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, Image, Vibration } from 'react-native';
 import status from '../../filterValues/statusValues.js'
 import gender from '../../filterValues/genderValues.js'
 import species from '../../filterValues/speciesValues.js'
 import types from '../../filterValues/typesValues.js'
-import { setCharactersList, resetCurrentPage, resetFilters, setGenderFilter, setStatusFilter, setTypeFilter, setSpeciesFilter } from '../store/slices/characters/index.js';
+import { setCharactersList, resetCurrentPage, resetFilters, setGenderFilter, 
+          setStatusFilter, setTypeFilter, setSpeciesFilter, setDeleteButtonEnable,
+          setOpenAccordionFilters, setOpenAccordionStatusFilter, setOpenAccordionGenderFilter,
+          setOpenAccordionTypeFilter, setOpenAccordionSpeciesFilter } from '../store/slices/characters/index.js';
 import { useDispatch, useSelector } from 'react-redux';
 
-const AccordionItem = ({deleteEnable, setDeleteEnable}) => {
+const AccordionItem = () => {
 
   const dispatch = useDispatch();
-  const { statusFilter, speciesFilter, typeFilter, genderFilter } = useSelector(state => state.characters);
-
-  const [showContent, setShowContent] = useState(false);
-  const [showStatus, setShowStatus] = useState(false);
-  const [showType, setShowType] = useState(false);
-  const [showGender, setShowGender] = useState(false);
-  const [showSpecies, setShowSpecies] = useState(false); 
+  const { statusFilter, speciesFilter, typeFilter, genderFilter, deleteButtonEnable, openAccordionFilters, 
+          openAccordionStatusFilter, openAccordionGenderFilter, openAccordionTypeFilter, openAccordionSpeciesFilter } = useSelector(state => state.characters);
 
   const updateDeleteButton = (filterValue, otherFilterValue1, otherFilterValue2, otherFilterValue3) =>{
 
     if(filterValue=='' && otherFilterValue1=='' && otherFilterValue2=='' && otherFilterValue3==''){
-      setDeleteEnable(false);
+      dispatch(setDeleteButtonEnable(false));
     }else{
-      setDeleteEnable(true);
+      dispatch(setDeleteButtonEnable(true));
     }
 
   }
@@ -36,10 +34,10 @@ const AccordionItem = ({deleteEnable, setDeleteEnable}) => {
           <TouchableOpacity onPress={() => {dispatch(setCharactersList([])); dispatch(resetCurrentPage()); 
             if( filterValue == '') {
               dispatch(setFilter(element.value)); 
-              updateDeleteButton(element.value, otherFilterValue1, otherFilterValue2, otherFilterValue3, setDeleteEnable);
+              updateDeleteButton(element.value, otherFilterValue1, otherFilterValue2, otherFilterValue3);
             }else{
               dispatch(setFilter(''));
-              updateDeleteButton('', otherFilterValue1, otherFilterValue2, otherFilterValue3, setDeleteEnable);
+              updateDeleteButton('', otherFilterValue1, otherFilterValue2, otherFilterValue3);
               
             }}}>
             <Text style={styles.text}>{element.value}</Text>
@@ -51,61 +49,61 @@ const AccordionItem = ({deleteEnable, setDeleteEnable}) => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.button} onPress={() => setShowContent(!showContent)}>
+      <TouchableOpacity style={styles.button} onPress={() => dispatch(setOpenAccordionFilters(!openAccordionFilters))}>
         <View style>
           <Text style={styles.filters_label} >Filters</Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => {
-          if(deleteEnable){
+          if(deleteButtonEnable){
             dispatch(resetFilters());
             dispatch(resetCurrentPage());
             dispatch(setCharactersList([]));
+            dispatch(setDeleteButtonEnable(false));
             Vibration.vibrate(10*100000000);
-            setDeleteEnable(false);
           }
         }}>
         <Image style={styles.papelera} source={require('../../papelera.png')}/>     
       </TouchableOpacity> 
       
-      {showContent && (
+      {openAccordionFilters && (
         <View>
-          <TouchableOpacity style={styles.button} onPress={() => setShowStatus(!showStatus)}>
+          <TouchableOpacity style={styles.button} onPress={() => dispatch(setOpenAccordionStatusFilter(!openAccordionStatusFilter))}>
             <View>
               <Text  style={styles.filters_label}>Status</Text>
             </View>
           </TouchableOpacity>
-          {showStatus && (
+          {openAccordionStatusFilter && (
             
             <TouchableOpacity activeOpacity={0.9} backgroundColor='white'>
              <View style={styles.options}>{optionsList(status, setStatusFilter,statusFilter,genderFilter, typeFilter, speciesFilter )}</View>
             </TouchableOpacity>
           )}
 
-          <TouchableOpacity style={styles.button} onPress={() => setShowGender(!showGender)}>
+          <TouchableOpacity style={styles.button} onPress={() => dispatch(setOpenAccordionGenderFilter(!openAccordionFilters))}>
             <View>
               <Text  style={styles.filters_label}>Gender</Text>
             </View>
           </TouchableOpacity>
-          {showGender && (
+          {openAccordionGenderFilter && (
             <View style={styles.options}>{optionsList(gender, setGenderFilter, genderFilter, statusFilter, typeFilter, speciesFilter)}</View>
           )}
 
-          <TouchableOpacity style={styles.button} onPress={() => setShowType(!showType)}>
+          <TouchableOpacity style={styles.button} onPress={() => dispatch(setOpenAccordionTypeFilter(!openAccordionStatusFilter))}>
             <View>
               <Text style={styles.filters_label}>Type</Text>
             </View>
           </TouchableOpacity>
-          {showType&& (
+          {openAccordionTypeFilter&& (
             <View style={styles.options} >{optionsList(types, setTypeFilter, typeFilter,statusFilter,genderFilter,speciesFilter)}</View>
           )}
 
-          <TouchableOpacity style={styles.button} onPress={() => setShowSpecies(!showSpecies)}>
+          <TouchableOpacity style={styles.button} onPress={() => dispatch(setOpenAccordionSpeciesFilter(!openAccordionSpeciesFilter))}>
             <View>
               <Text style={styles.filters_label}>Species</Text>
             </View>
           </TouchableOpacity>
-          {showSpecies&& (
+          {openAccordionSpeciesFilter&& (
               <View style={styles.options}>{optionsList(species, setSpeciesFilter, speciesFilter, statusFilter, genderFilter,typeFilter)}</View>
           )}
 

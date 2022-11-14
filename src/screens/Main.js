@@ -5,7 +5,7 @@ import FiltersList from '../components/FilterList.js';
 import ModalItem from '../components/ModalItem.js';
 import styles from './MainStyles.js';
 import RenderItem from '../components/RenderItem.js';
-import { fetchCharacters, setCharactersList, incrementCurrentPage, resetCurrentPage, setNameFilter } from '../store/slices/characters/index.js';
+import { fetchCharacters, setCharactersList, incrementCurrentPage, resetCurrentPage, setNameFilter, setDeleteButtonEnable } from '../store/slices/characters/index.js';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Main = ({navigation}) => {
@@ -13,8 +13,7 @@ const Main = ({navigation}) => {
   const dispatch = useDispatch();
   const { list: characters, showCharacterModal, currentPage, nameFilter, statusFilter, genderFilter, typeFilter, speciesFilter } = useSelector(state => state.characters);
 
-  const [deleteEnable, setDeleteEnable] = useState(false);
-  const [value, setValue] = useState(false);
+  const [reRenderFlatListFlag, setReRenderFlatListFlag] = useState(false);
 
   const scrollY = React.useRef(new Animated.Value(0)).current;
 
@@ -24,7 +23,7 @@ const Main = ({navigation}) => {
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
-      setValue(value=>!value);
+      setReRenderFlatListFlag(reRenderFlatListFlag=>!reRenderFlatListFlag);
     });
     return unsubscribe;
   }, [navigation]);
@@ -37,7 +36,7 @@ const Main = ({navigation}) => {
 
   handlerLoadMore = () =>{
     dispatch(incrementCurrentPage());
-    setDeleteEnable(true);
+    dispatch(setDeleteButtonEnable(true));
   }
 
   return (
@@ -51,9 +50,9 @@ const Main = ({navigation}) => {
         </View>
       </TouchableOpacity>
 
-      <AccordionItem deleteEnable={deleteEnable} setDeleteEnable={setDeleteEnable}/>
+      <AccordionItem/>
 
-      <TextInput style={styles.searchBar} value={nameFilter} onChangeText={ (value) => {dispatch(setNameFilter(value)); dispatch(resetCurrentPage()); dispatch(setCharactersList([])); if(value.length == 0){setDeleteEnable(false)}else{setDeleteEnable(true)}} } placeholder='Search for characters by name ...'></TextInput>            
+      <TextInput style={styles.searchBar} value={nameFilter} onChangeText={ (value) => {dispatch(setNameFilter(value)); dispatch(resetCurrentPage()); dispatch(setCharactersList([])); if(value.length == 0){dispatch(setDeleteButtonEnable(false))}else{dispatch(setDeleteButtonEnable(true))}} } placeholder='Search for characters by name ...'></TextInput>            
 
       <Animated.FlatList
         style={styles.flatlist_style}
@@ -65,7 +64,7 @@ const Main = ({navigation}) => {
         numColumns={2}
         columnWrapperStyle={styles.row}
         data={characters}
-        extraData={value}
+        extraData={reRenderFlatListFlag}
         renderItem={renderItem}
         onEndReached={handlerLoadMore}
       />
