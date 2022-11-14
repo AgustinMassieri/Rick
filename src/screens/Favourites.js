@@ -21,10 +21,9 @@ const Favorites = ({navigation}) => {
     getData = async() => {
         dispatch(emptyFavouriteCharactersList());
     
-        const q = query(collection(db, "Characters"), where("userId", "==", auth.currentUser.uid));
-        const aux2 = [];
-        
-        onSnapshot(q, (querySnapshot) => {
+        const q = query(collection(db, "Characters"), where("userId", "==", auth.currentUser.uid));        
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            const aux2 = [];
             querySnapshot.docs.forEach( (doc) => {
                 const aux = doc.data()
                 aux2.push(aux);
