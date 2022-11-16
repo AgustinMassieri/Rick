@@ -23,10 +23,10 @@ const styles = StyleSheet.create({
       backgroundColor: '#585858',
     },
     modalExit:{
-      top:'1%',
       marginLeft:'80%',
-      fontSize: 30,
+      fontSize: 45,
       color: 'white',
+      paddingBottom:'1%'
      },
     modalCharacterName:{
       marginBottom:10,
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     },
     comment_modal: {
       width: '80%',
-      height: '28%',
+      height: '22%',
       borderRadius: 30,
       borderStyle: 'solid',
       borderWidth: 2,
@@ -171,12 +171,16 @@ const styles = StyleSheet.create({
       borderStyle: 'solid',
       borderWidth: 2,
       color: 'white',
+      marginTop: '%2'
     },
     favorites_text: {
       position: 'absolute', 
       color:'white', 
       fontWeight:'bold', 
       fontSize: 25
+    },
+    input: {
+      textAlign: 'center',
     },
     barra_favorites_text: {
       marginBottom: '8%', 
