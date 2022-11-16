@@ -12,8 +12,8 @@ const styles = StyleSheet.create({
       marginBottom: 20
     },
     modalCard: {
-      width: '70%',
-      height: '43%',
+      width: '78%',
+      height: '53%',
       borderRadius: 30,
       borderStyle: 'solid',
       borderWidth: 2,
@@ -94,8 +94,8 @@ const styles = StyleSheet.create({
       borderColor: 'black',
       borderStyle: 'solid',
       borderWidth: 1,
-      right: 35,
-      bottom:65
+      right: 40,
+      bottom:90
     },
     filteredBy: {
       marginRight:10, 
