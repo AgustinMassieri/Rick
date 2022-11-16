@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
       borderStyle: 'solid',
       borderWidth: 2,
       color: 'white',
-      marginTop: '%2'
+      marginTop: '2%'
     },
     favorites_text: {
       position: 'absolute', 
