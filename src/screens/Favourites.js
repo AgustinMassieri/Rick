@@ -5,7 +5,7 @@ import FlatListItem from '../components/FlatListItem.js';
 import ModalItem from '../components/ModalItem.js';
 import ModalComment from '../components/ModalComment.js';
 import { auth, db } from '../../config/firebase';
-import { collection, onSnapshot, query, deleteDoc, doc, where } from "firebase/firestore";
+import { collection, onSnapshot, query, deleteDoc, doc, where, updateDoc } from "firebase/firestore";
 import { setFavouriteCharactersList, emptyFavouriteCharactersList, setShowCommentModal, setCurrentCharacter } from '../store/slices/characters/index.js';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -26,7 +26,10 @@ const Favorites = ({navigation}) => {
             const aux2 = [];
             querySnapshot.docs.forEach( (doc) => {
                 const aux = doc.data()
-                aux2.push(aux);
+                if(aux.isActive == 'true'){
+                    aux2.push(aux);
+                }
+                
             });
             dispatch(setFavouriteCharactersList(aux2));
         });        
@@ -34,7 +37,10 @@ const Favorites = ({navigation}) => {
 
     async function deleteFavCharacter (item){
         try {
-          const docRef = await deleteDoc(doc(db, "Characters", item.name+' - '+auth.currentUser.uid));
+          //const docRef = await deleteDoc(doc(db, "Characters", item.name+' - '+auth.currentUser.uid));
+          const docRef = await updateDoc(doc(db, "Characters", item.name+' - '+auth.currentUser.uid), {
+            isActive: 'false'
+          });
           getData();
          } catch (e) {
           console.error("Error adding document: ", e);

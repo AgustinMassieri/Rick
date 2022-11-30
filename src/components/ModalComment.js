@@ -10,17 +10,18 @@ import { setInputCommentModal, setShowCommentModal } from '../store/slices/chara
 const ModalComment = () => {
 
     const dispatch = useDispatch();
-    const { currentCharacter, inputCommentModal } = useSelector(state => state.characters);
-
+    const { currentCharacter } = useSelector(state => state.characters);
     const [errorEmptyComment, setErrorEmptyComment] = useState(false);
+    const [ auxComment, setAuxComment ] = useState(currentCharacter.comment);
 
     async function addComment (){
+        
         try {
-          if(inputCommentModal == ''){
+          if(auxComment == ''){
             setErrorEmptyComment(true);
           } else{
             const docRef = await updateDoc(doc(db, "Characters", currentCharacter.name+' - '+auth.currentUser.uid), {
-                comment: inputCommentModal
+                comment: auxComment
               });
               dispatch(setInputCommentModal(''));
               dispatch(setShowCommentModal(false));
@@ -36,7 +37,7 @@ const ModalComment = () => {
         <View style={styles.modalContainer}>
             <View  style={styles.comment_modal} >
                 <Text style={styles.modalExit} onPress={() => dispatch(setShowCommentModal(false))}>X</Text>
-                <TextInput style={styles.comment_input_text} placeholder='Ingrese un comentario:' placeholderTextColor="white" value={inputCommentModal} onChangeText={ (value) => dispatch(setInputCommentModal(value)) }/>
+                <TextInput style={styles.comment_input_text} placeholder='Ingrese un comentario:' placeholderTextColor="white" value={auxComment} onChangeText={ (value) => setAuxComment(value) }/>
                 <TouchableOpacity onPress={addComment}>
                     <Text style={styles.comment_btn_text}>Agregar comentario</Text>
                 </TouchableOpacity> 
